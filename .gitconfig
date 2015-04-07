@@ -1,0 +1,7 @@
+[user]
+	name = Keloran
+	email = keloran@nordicarts.net
+[push]
+	default = simple
+[core]
+	editor = /usr/bin/vim
