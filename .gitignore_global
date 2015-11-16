@@ -1,5 +1,18 @@
+# OSX
 .DS_Store
-*.swp
+.Spotlight-V100
+.Trashes
+
+# IntelliJ
 .idea
-.bundle/
+*.iml
+
+# Ruby
+.bundle
+
+# Terminal
+*.swp
+
+# Windows
+Thumbs.db # Windows Thumbnails
 
