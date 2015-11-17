@@ -33,6 +33,7 @@ killall Safari > /dev/null 2>&1
 # Mission Control
 defaults write com.apple.dashboard mxc-disabled -bool true
 defaults write com.apple.dock dashboard-in-overlay -bool true
+defaults write com.apple.dock mru-spaces -bool false
 
 # Spotlight
 defaults write com.apple.spotlight orderedItems -array \
@@ -61,7 +62,10 @@ defaults write com.apple.dock show-process-indicators -bool true
 
 dockutil --no-restart --remove all
 dockutil --no-restart --add "/Applications/Safari.app"
-dockutil --no-restart --add "/Applications/System Preferences.app"
 dockutil --no-restart --add "$HOME/Applications/iTerm.app"
+dockutil --no-restart --add "$HOME/Applications/Slack.app"
+dockutil --no-restart --add "/Applications/Dash.app"
+dockutil --no-restart --add "/Appications/Airmail 2.app"
+dockutil --no-restart --add "/Applications/System Preferences.app"
 
 killall Dock /dev/null 2>&1
