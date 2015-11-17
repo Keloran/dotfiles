@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Install xcode 
+# Install xcode
 sudo softwareupdate -i -a
 xcode-select --install
 
@@ -14,11 +14,11 @@ git clone git@github.com:Keloran/dotfiles.git .dotfiles/keloran
 cd .dotfiles/keloran
 
 function doIt() {
-    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" -av --no-perms . ~
+  rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" -av --no-perms . ~
 	.~/installs/osx.sh
 	.~/installs/brew.sh
 	.~/installs/z.sh
-    source ~/.zshrc
+  source ~/.zshrc
 
 	# Remove the old files
 	rm -rf ~/installs
