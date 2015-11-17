@@ -58,6 +58,20 @@ zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
 zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
 zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
+function get_pwd() {
+	git_root=$PWD
+	while [[ $git_root != / && ! -e $git_root/.git ]]; do
+		git_root=$git_root:h
+	done
+	if [[ $git_root = / ]]; then
+		unset $git_root
+		prompt_short_dir=%~
+	else
+		parent=${git_root%\/*}
+		prompt_short_dir=${PWD#$parent/}
+	fi
+	echo $prompt_short_dir
+}
 
 function steeef_preexec {
     case "$(history $HISTCMD)" in
@@ -93,4 +107,6 @@ function steeef_precmd {
 }
 add-zsh-hook precmd steeef_precmd
 
-PROMPT=$'%{$purple%}%n%{$reset_color%} on %{$hotpink%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%} λ%{$reset_color%} '
+#PROMPT=$'%{$purple%}%n%{$reset_color%} on %{$hotpink%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%} λ%{$reset_color%} '
+PROMPT=$'%{$purple%}%n%{$reset_color%} on %{$hotpink%}%m%{$reset_color%} in %{$limegreen%}$(get_pwd)%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%} λ%{$reset_color%} '
+
