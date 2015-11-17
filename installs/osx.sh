@@ -1,9 +1,10 @@
-# Install Brew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-./brew.sh
+# Network
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Oh my ZSH
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Trackpad
+defaults write com.apple.driver.AppleBluetoolMultitouch.trackpad Clicking -bool true
+defaults -currentHost write com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.mouse.tapBehavior -int 1
 
 # Screen
 defaults write com.apple.screensaver askForPassword -int 1
@@ -12,6 +13,9 @@ defaults write com.apple.screensaver askForPasswordDelay -int 5
 # Finder
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder ShowPathBar -bool true
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 killall Finder > /dev/null 2>&1
 

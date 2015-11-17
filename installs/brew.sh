@@ -1,3 +1,6 @@
+# Install Brew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 # Update brew
 brew update
 brew upgrade
@@ -13,7 +16,7 @@ brew install nmap
 brew install carthage
 
 # Brew Casks
-brew install caskroom/cask/bew-cask
+brew install caskroom/cask/brew-cask
 brew cask install alcatraz
 brew cask install cocoapods
 brew cask install bartender
