@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 
 BIN_NAME=$(basename "$0")
 COMMAND_NAME=$1
@@ -11,11 +11,9 @@ sub_help () {
     echo "   help               This help message"
     echo "   edit               Open dotfiles in editor ($EDITOR_ALT) and Git GUI ($GIT_GUI)"
     echo "   reload             Reload dotfiles"
-    echo "   test               Run tests"
     echo "   update             Update packages and pkg managers (OS, brew, npm, gem, pip)"
     echo "   osx                Apply OS X system defaults"
     echo "   dock               Apply OS X Dock settings"
-    echo "   install mjolnir    Install Mjolnir (Homebrew/Luarocks)"
     echo "   install vundle     Install Vundle"
 }
 
@@ -25,23 +23,13 @@ sub_edit () {
 }
 
 sub_reload () {
-    . ~/.bash_profile && echo "Bash reloaded."
-}
-
-sub_test () {
-    bats "$DOTFILES_DIR"/test/*.bats
+    source ~/.zshrc && echo "ZSH reloaded."
 }
 
 sub_update () {
     sudo softwareupdate -i -a
     brew update
     brew upgrade
-    npm install npm -g
-    npm update -g
-    gem update --system
-    gem update
-    pip install --upgrade pip
-    pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U
 }
 
 sub_osx () {
