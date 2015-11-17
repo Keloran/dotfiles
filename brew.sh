@@ -3,7 +3,6 @@ brew update
 brew upgrade
 
 # Default Brews
-brew install zsh
 brew install ssh-copy-id
 brew install tree
 brew install boost
