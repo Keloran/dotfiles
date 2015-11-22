@@ -8,12 +8,13 @@ brew upgrade
 # Default Brews
 brew install ssh-copy-id
 brew install tree
-brew install boost
+brew install boost --universal
 brew install cmake
 brew install htop-osx
 brew install multitail
 brew install nmap
 brew install carthage
+brew install openal-soft --univeral
 
 # Brew Casks
 brew install caskroom/cask/brew-cask
@@ -32,6 +33,7 @@ brew cask install istat-menus
 brew cask install slack
 brew cask install dockertoolkit
 brew cask install kitematic
+brew cask install moom
 
 # Cleanup
 brew cask cleanup
