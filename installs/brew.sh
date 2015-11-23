@@ -1,6 +1,10 @@
 # Install Brew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# Taps
+brew tap homebrew/homebrew-games
+brew tap homebrew/homebrew-dupes
+
 # Update brew
 brew update
 brew upgrade
