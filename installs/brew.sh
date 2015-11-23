@@ -18,6 +18,7 @@ brew install htop-osx
 brew install multitail
 brew install nmap
 brew install carthage
+brew install openal-soft --universal
 
 # Brew Casks
 brew install caskroom/cask/brew-cask
