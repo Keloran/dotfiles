@@ -4,6 +4,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 # Taps
 brew tap homebrew/homebrew-games
 brew tap homebrew/homebrew-dupes
+brew tap caskroom/cask
 
 # Update brew
 brew update
@@ -21,7 +22,6 @@ brew install carthage
 brew install openal-soft --universal
 
 # Brew Casks
-brew install caskroom/cask/brew-cask
 brew cask install alcatraz
 brew cask install cocoapods
 brew cask install bartender
