@@ -1,3 +1,4 @@
+alias projects="cd ~/Documents/Projects"
 alias dogup="docker-machine start default && eval \"\$(docker-machine env default)\""
 alias dogdown="docker-machine stop default"
 alias dogenv="eval \"\$(docker-machine env default)\""
