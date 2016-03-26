@@ -35,12 +35,15 @@ brew cask install disk-inventory-x
 brew cask install istat-menus
 brew cask install slack
 brew cask install dockertoolkit
-brew cask install kitematic
 brew cask install moom
 brew cask install alfred
 brew cask install jadengellar-helium
 brew cask install flux
 brew cask install sqlitebrowser
+brew cask install gas-mask
+brew cask install aerial
+brew cask install clion
+brew cask install intellij-idea
 
 # Cleanup
 brew cask cleanup
