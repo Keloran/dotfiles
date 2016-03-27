@@ -53,7 +53,6 @@ ZSH_CUSTOM=/Users/Keloran/.zsh_custom
 plugins=(git z osx brew-cask sudo pod brew common-aliases docker)
 
 # User configuration
-
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
