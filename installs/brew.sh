@@ -19,6 +19,7 @@ brew install multitail
 brew install nmap
 brew install carthage
 brew install openal-soft --universal
+brew install git-extras
 
 # Brew Casks
 brew cask install alcatraz
