@@ -1,7 +1,25 @@
 [user]
 	name = Keloran
 	email = keloran@nordicarts.net
+    image = "https://avatars1.githubusercontent.com/u/200350?v=3&s=460"
 [push]
 	default = simple
 [core]
 	editor = /usr/bin/vim
+    excludesfile = ~/.gitignore_global
+[github]
+    user = keloran
+[alias]
+    a = add --all
+    b = branch
+    c = commit
+    co = checkout
+    rh = reset --hard
+    s = status -sb
+    am = add --all -m
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+[push]
+    default = upstream
