@@ -4,7 +4,11 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Vundle
 Plugin 'gmarik/Vundle.vim'
+
+" You Complete Me
+Plugin 'Valloric/YouCompleteMe'
 
 " Language stuff
 Plugin 'instant-markdown.vim'
