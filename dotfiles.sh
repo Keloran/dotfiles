@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env bash
 
 BIN_NAME=$(basename "$0")
 COMMAND_NAME=$1
@@ -14,7 +14,9 @@ sub_help () {
     echo "   update             Update packages and pkg managers (OS, brew, npm, gem, pip)"
     echo "   osx                Apply OS X system defaults"
     echo "   dock               Apply OS X Dock settings"
-    echo "   install vundle     Install Vundle"
+    echo "   cli                Install CLI"
+    echo "   apps               Install Apps"
+    echo "   full               Install All of it"
 }
 
 sub_edit () {
@@ -33,14 +35,34 @@ sub_update () {
 }
 
 sub_osx () {
-    for DEFAULTS_FILE in "$DOTFILES_DIR"/osx/defaults*.sh; do
-        echo "Applying $DEFAULTS_FILE" && . "$DEFAULTS_FILE"
-    done
+    sh -c "$DOTFILES_DIR"/installs/osx/defaults.sh
     echo "Done. Some changes may require a logout/restart to take effect."
 }
 
 sub_dock () {
-    . "$DOTFILES_DIR/osx/dock.sh" && echo "Dock reloaded."
+    sh -c "$DOTFILES_DIR"/installs/osx/dock.sh
+    echo "Dock reloaded."
+}
+
+sub_cli () {
+    sh -c "$DOTFILES_DIR"/installs/cli/vundle.sh
+    echo "Vundle Installed"
+
+    sh -c "$DOTFILES_DIR"/installs/cli/z.sh
+    echo "ZSH and Z Installed" 
+}
+
+sub_apps () {
+    sh -c "$DOTFILES_DIR"/installs/apps/brew.sh
+    echo "Brew Installed"
+}
+
+sub_full () {
+    sub_apps
+    sub_cli
+    sub_osx
+    sub_dock
+    sub_reload
 }
 
 sub_install () {

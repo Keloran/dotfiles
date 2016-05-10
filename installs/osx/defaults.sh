@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Network
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
@@ -53,19 +55,3 @@ defaults write com.apple.spotlight orderedItems -array \
 	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
 	'{"enabled" = 0;"name" = "SOURCE";}'
 
-killall mds > /dev/null 2>&1
-sudo mdutil -i on / > /dev/null
-sudo mdutil -E / > /dev/null
-
-# Dock
-defaults write com.apple.dock show-process-indicators -bool true
-
-dockutil --no-restart --remove all
-dockutil --no-restart --add "/Applications/Safari.app"
-dockutil --no-restart --add "$HOME/Applications/iTerm.app"
-dockutil --no-restart --add "$HOME/Applications/Slack.app"
-dockutil --no-restart --add "/Applications/Dash.app"
-dockutil --no-restart --add "/Appications/Airmail 2.app"
-dockutil --no-restart --add "/Applications/System Preferences.app"
-
-killall Dock /dev/null 2>&1
