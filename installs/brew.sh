@@ -27,7 +27,6 @@ brew cask install cocoapods
 brew cask install bartender
 brew cask install dropbox
 brew cask install iterm2
-brew cask install macid
 brew cask install sequel-pro
 brew cask install the-unarchiver
 brew cask install atom
@@ -45,6 +44,8 @@ brew cask install gas-mask
 brew cask install aerial
 brew cask install clion
 brew cask install intellij-idea
+brew cask install paw
+brew cask install knockknock
 
 # Cleanup
 brew cask cleanup
