@@ -7,9 +7,6 @@ call vundle#begin()
 " Vundle
 Plugin 'gmarik/Vundle.vim'
 
-" You Complete Me
-Plugin 'Valloric/YouCompleteMe'
-
 " Language stuff
 Plugin 'instant-markdown.vim'
 Plugin 'vim-ruby/vim-ruby'
@@ -86,5 +83,3 @@ endif
 
 " Markdown
 let g:instant_markdown_autostart = 0
-
-

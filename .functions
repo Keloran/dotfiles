@@ -2,3 +2,15 @@ function mkd()
 {
     mkdir -p "$@" && cd "$@"
 }
+
+cleanDockerImages()
+{
+    docker ps -a | grep 'Exited' | awk '{print $1}' | xargs docker rm
+    docker images -aq | xargs docker rmi
+}
+
+cleanDockerImagesForce()
+{
+    docker volume rm $(docker volume ls -qf dangling=true)
+    docker volume rm $(docker volume ls -qf dangling=false)
+}

@@ -1,20 +1,4 @@
 alias projects="cd ~/Documents/Projects"
-alias dogup="docker-machine start default && eval \"\$(docker-machine env default)\""
-alias dogdown="docker-machine stop default"
-alias dogenv="eval \"\$(docker-machine env default)\""
-alias dockerPsClean="docker ps -a | grep 'Exited' | awk '{print $1}' | xargs  docker rm"
-dockerIp() {
 
-    docker-machine ip default 2> /dev/null
-}
-
-setDockerIpInHosts() {
-    SUCCESS=0;
-    grep -q $(dockerIp) /etc/hosts;
-    
-    if [ $? -eq $SUCCESS ]; then
-        echo "$(dockerIp) already in hosts file";
-    else
-        echo $(dockerIp) dockerhost | sudo tee -a /etc/hosts
-    fi
-}
+# Docker Stuffs
+alias dockerPsClean="docker ps -a | grep 'Exited' | awk '{print $1}' | xargs docker rm"
