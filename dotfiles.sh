@@ -12,9 +12,8 @@ sub_help () {
     echo "   edit               Open dotfiles in editor ($EDITOR_ALT) and Git GUI ($GIT_GUI)"
     echo "   reload             Reload dotfiles"
     echo "   update             Update packages and pkg managers (OS, brew, npm, gem, pip)"
-    echo "   osx                Apply OS X system defaults"
-    echo "   dock               Apply OS X Dock settings"
     echo "   install vundle     Install Vundle"
+    echo "   install osx        Install OSX Defaults"
 }
 
 sub_edit () {
@@ -44,7 +43,7 @@ sub_dock () {
 }
 
 sub_install () {
-    local SCRIPT="$DOTFILES_DIR/install/$SUB_COMMAND_NAME.sh"
+    local SCRIPT="$DOTFILES_DIR/installs/$SUB_COMMAND_NAME.sh"
     [ -f "$SCRIPT" ] && . "$SCRIPT" || echo "Unable to find script to install $SUB_COMMAND_NAME"
 }
 
