@@ -1,4 +1,5 @@
 alias projects="cd ~/Documents/Projects"
 
 # Docker Stuffs
-alias dockerPsClean="docker ps -a | grep 'Exited' | awk '{print $1}' | xargs docker rm"
+alias dockerPsClean="docker ps -a --format 'table {{.Names}} {{.Status}}' | grep 'Exited' | awk '{print $1}' | xargs docker rm"
+alias dockerUpdateAll="docker images --format 'table {{.Repository}} {{.Tag}}' | awk '{print $1 ":" $2}' | grep -iv 'repository' | xargs -L1 docker pull"
