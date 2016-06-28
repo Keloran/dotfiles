@@ -48,6 +48,7 @@ brew cask install clion
 brew cask install intellij-idea
 brew cask install paw
 brew cask install knockknock
+brew cask install dbeaver-enterprise
 
 # Cleanup
 brew cask cleanup
