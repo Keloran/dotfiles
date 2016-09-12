@@ -49,6 +49,7 @@ brew cask install intellij-idea
 brew cask install paw
 brew cask install knockknock
 brew cask install dbeaver-enterprise
+brew cask install shuttle
 
 # Cleanup
 brew cask cleanup
