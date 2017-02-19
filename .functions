@@ -14,3 +14,23 @@ cleanDockerImagesForce()
     docker volume rm $(docker volume ls -qf dangling=true)
     docker volume rm $(docker volume ls -qf dangling=false)
 }
+
+dockerRemoveDangling()
+{
+  docker images -f 'dangling=true' -q | awk '{print \$1}' | xargs -L1 docker rmi
+}
+
+dockerUpdateAll()
+{
+  docker images --format '{{.Repository}} {{.Tag}}' | awk '{print \$1 \":\" \$2}' | grep -iv 'repository' | xargs -L1 docker pull
+}
+
+dockerPsClean()
+{
+  docker ps -a --format '{{.Names}} {{.Status}}' | grep 'Exited' | awk '{print \$1}' | xargs docker rm
+}
+
+dockerUI()
+{
+  docker run -dp 9001:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock uifd/ui-for-docker
+}

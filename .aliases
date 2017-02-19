@@ -1,9 +1,7 @@
 alias projects="cd ~/Documents/Projects"
 
 # Docker Stuffs
-alias dogup="docker-machine start default && eval \"\$(docker-machine env default)\""
-alias dogdown="docker-machine stop default"
-alias dogenv="eval \"\$(docker-machine env default)\""
-alias dockerPsClean="docker ps -a --format '{{.Names}} {{.Status}}' | grep 'Exited' | awk '{print \$1}' | xargs docker rm"
-alias dockerUpdateAll="docker images --format '{{.Repository}} {{.Tag}}' | awk '{print \$1 \":\" \$2}' | grep -iv 'repository' | xargs -L1 docker pull"
-alias dockerRemoveDangling="docker images -f 'dangling=true' -q | awk '{print \$1}' | xargs -L1 docker rmi"
+alias docker-start="docker-compose build && docker-stop && docker-compose up -d"
+alias docker-stop="docker-compose stop && dockerPsClean && docker-compose ps"
+alias docker-logs="docker-compose logs -f"
+alias docker-restart="docker-stop && docker-start"

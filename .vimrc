@@ -2,6 +2,8 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
+
+" Start Vundle
 call vundle#begin()
 
 " Vundle
@@ -38,6 +40,7 @@ Plugin 'ervandew/supertab'
 " EditorConfig
 Plugin 'editorconfig/editorconfig-vim'
 
+" Stop Vundle
 call vundle#end()
 
 " Indent and Highlight

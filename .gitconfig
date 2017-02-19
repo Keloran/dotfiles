@@ -18,10 +18,18 @@
     s = status -sb
     am = add --all -m
 		standup = !"git log --reverse --branches --since=$(if [[ "Mon" == "$(date +%a)" ]]; then echo "last friday"; else echo "yesterday"; fi) --author=$(git config --get user.email) --format=format:'%C(cyan) %ad %C(yellow)%h %Creset %s %Cgreen%d' --date=local"
-		pushit = !"git push -u origin $(git rev-parse --abbrev-ref HEAD)"		
+		pushit = !"git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+		ticket = !"git checkout -b $2"
+		master = !"git checkout master && git pull"
 [color]
     branch = auto
     diff = auto
     status = auto
 [push]
     default = upstream
+[commit]
+		gpgsign = true
+[filter "lfs"]
+		clean = git-lfs clean %f
+		smudge = git-lfs smudge %f
+		required = true
