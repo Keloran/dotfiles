@@ -1,7 +1,8 @@
 alias projects="cd ~/Documents/Projects"
 
 # Docker Stuffs
-alias docker-start="docker-compose build && docker-stop && docker-compose up -d"
-alias docker-stop="docker-compose stop && dockerPsClean && docker-compose ps"
+alias docker-start="dockerStart"
+alias docker-start-logs="dockerStart && docker-logs"
+alias docker-stop="dockerStop"
 alias docker-logs="docker-compose logs -f"
 alias docker-restart="docker-stop && docker-start"
