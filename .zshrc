@@ -54,6 +54,7 @@ plugins=(git z osx brew-cask sudo pod brew common-aliases docker docker-compose)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

@@ -37,8 +37,8 @@ dockerUI()
 
 dockerStart()
 {
-    docker-compose build
     dockerStop
+    docker-compose build
     docker-compose up -d
     docker-compose ps
 }
