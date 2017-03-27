@@ -29,6 +29,7 @@ brew install ssh-copy-id
 brew install tree
 brew install watch
 brew install wget
+brew install go
 
 # Brew Casks
 brew cask install aerial
@@ -50,7 +51,6 @@ brew cask install hipchat
 brew cask install intellij-idea
 brew cask install istat-menus
 brew cask install iterm2
-brew cask install jadengellar-helium
 brew cask install knockknock
 brew cask install moom
 brew cask install paw
