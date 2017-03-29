@@ -30,6 +30,8 @@ brew install tree
 brew install watch
 brew install wget
 brew install go
+brew install python
+brew install dnsmasq
 
 # Brew Casks
 brew cask install aerial
@@ -63,3 +65,6 @@ brew cask install the-unarchiver
 # Cleanup
 brew cask cleanup
 brew cleanup
+
+# Python
+pip install --upgrade pip setuptools

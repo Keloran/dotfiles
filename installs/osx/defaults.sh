@@ -4,7 +4,7 @@
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Trackpad
-defaults write com.apple.driver.AppleBluetoolMultitouch.trackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write com.apple.mouse.tapBehavior -int 1
 defaults write com.apple.mouse.tapBehavior -int 1
 
