@@ -35,12 +35,13 @@ fi
 # Docker
 keloran_get_docker_host() {
     ZSH_WHALE="🐳"
-    DOCKER_LOCAL_COLOR=$limegreen
-    DOCKER_REMOTE_COLOR=$hotpink
+    DOCKER_LOCAL_COLOR="blue"
+    DOCKER_REMOTE_COLOR="red"
   
-    local _docker="${ZSH_WHALE} $DOCKER_HOST"
-    local _docker_local="%{$fg_bold[$DOCKER_LOCAL_COLOR]%}local%{$reset_color%} "
-    local _docker_remote="%{$fg_bold[$DOCKER_REMOTE_COLOR]%}$_docker%{$reset_color%} "
+    local _docker=$DOCKER_HOST
+    local _ldocker="local"
+    local _docker_local="${ZSH_WHALE}  %{$fg_bold[$DOCKER_LOCAL_COLOR]%}$_ldocker%{$reset_color%} "
+    local _docker_remote="${ZSH_WHALE}  %{$fg_bold[$DOCKER_REMOTE_COLOR]%}$_docker%{$reset_color%} "
     local _docker_status="$_docker_remote"
 
     if [[ -z "$_docker" ]]; then
@@ -141,4 +142,4 @@ keloran_right() {
 }
 
 PROMPT='$(keloran_get_location)'
-RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host) [%*]'
+RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host)[%*]'
