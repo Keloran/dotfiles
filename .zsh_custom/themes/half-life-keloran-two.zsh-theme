@@ -33,8 +33,7 @@ else
 fi
 
 # Docker
-get_docker_host() {
-    ZSH_THEME_DOCKER_PREFIX="%B⬡%b "
+keloran_get_docker_host() {
     ZSH_WHALE="🐳"
     DOCKER_LOCAL_COLOR=$limegreen
     DOCKER_REMOTE_COLOR=$hotpink
@@ -77,7 +76,7 @@ zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
 zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
 zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-function get_pwd() {
+function keloran_get_pwd() {
 	git_root=$PWD
 	while [[ $git_root != / && ! -e $git_root/.git ]]; do
 		git_root=$git_root:h
@@ -92,7 +91,7 @@ function get_pwd() {
 	echo $prompt_short_dir
 }
 
-function steeef_preexec {
+function keloran_preexec {
     case "$(history $HISTCMD)" in
         *git*)
             PR_GIT_UPDATE=1
@@ -102,14 +101,14 @@ function steeef_preexec {
             ;;
     esac
 }
-add-zsh-hook preexec steeef_preexec
+add-zsh-hook preexec keloran_preexec
 
-function steeef_chpwd {
+function keloran_chpwd {
     PR_GIT_UPDATE=1
 }
-add-zsh-hook chpwd steeef_chpwd
+add-zsh-hook chpwd keloran_chpwd
 
-function steeef_precmd {
+function keloran_precmd {
     if [[ -n "$PR_GIT_UPDATE" ]] ; then
         # check for untracked files or updated submodules, since vcs_info doesn't
         if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -124,15 +123,22 @@ function steeef_precmd {
         PR_GIT_UPDATE=
     fi
 }
-add-zsh-hook precmd steeef_precmd
+add-zsh-hook precmd keloran_precmd
 
-get_location() {
+keloran_get_location() {
   local _loc_machine="%{$hotpink%}%m%{$reset_color%}::%{$purple%}%n%{$reset_color%}"
-  local _loc_path="in %{$limegreen%}$(get_pwd)%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_"
+  local _loc_path="in %{$limegreen%}$(keloran_get_pwd)%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_"
   HL_PROMPT="%{$orange%}λ%{$reset_color%} "
   
   echo "${_loc_machine} ${_loc_path} $HL_PROMPT"
 }
 
-#PROMPT='$(get_docker_host) %{$reset_color%} $(get_location)'
-PROMPT='$(get_docker_host)${reset_color%}$(get_location)'
+keloran_right() {
+    local _left='$(nvm_prompt_info) $(keloran_get_docker_host)'
+    local _right="[%*] "
+    _SPACE="$(keloran_get_space) $_left $_right"
+    echo "$_left$_SPACE$_right"
+}
+
+PROMPT='$(keloran_get_location)'
+RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host) [%*]'

@@ -5,7 +5,7 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="half-life-keloran"
+ZSH_THEME="half-life-keloran-two"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -49,14 +49,16 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z osx brew-cask sudo pod brew common-aliases docker docker-compose go)
+plugins=(git z osx brew-cask sudo pod brew common-aliases docker docker-compose aws go golang)
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/hootonm/Documents/Tools/blog-utilities/bin:/usr/local/opt/go/libexec/bin"
+export MAVEN_OPTS="-Djavax.net.ssl.trustStore=/Users/hootonm/.m2/cacerts-plus-artifactory.jks -Djavax.net.ssl.trustStorePassword=changeit"
 export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.cargo/env
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -74,6 +76,14 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# GPG
+if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
+    source ~/.gnupg/.gpg-agent-info
+    export GPG_AGENT_INFO
+else
+    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+fi
+
 # Aliases
 #
 if [ -f ~/.aliases ]; then
@@ -83,12 +93,4 @@ fi
 # Functions
 if [ -f ~/.functions ]; then
     source ~/.functions
-fi
-
-# GPG
-if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
-  source ~/.gnupg/.gpg-agent-info
-  export GPG_AGENT_INFO
-else
-  eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
