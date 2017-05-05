@@ -93,19 +93,19 @@ keloran_git_status() {
   # Repo
   _INDEX=$(command git status --porcelain -b 2> /dev/null)
   if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
-      _STATUS="$_STATUS$KEL_GIT_AHEAD"
+      _STATUS="$_STATUS $KEL_GIT_AHEAD"
   fi
   
   if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
-      _STATUS="$_STATUS$KEL_GIT_BEHIND"
+      _STATUS="$_STATUS $KEL_GIT_BEHIND"
   fi
   
   if $(echo "$_INDEX" | command grep -q '^## .*diverged'); then
-      _STATUS="$_STATUS$KEL_GIT_DIVERGED"
+      _STATUS="$_STATUS $KEL_GIT_DIVERGED"
   fi
   
   if $(command git rev-parse --verify refs/stash &> /dev/null); then
-      _STATUS="$_STATUS$KEL_GIT_STASHED"
+      _STATUS="$_STATUS $KEL_GIT_STASHED"
   fi
   
   echo " $_STATUS"
