@@ -10,12 +10,6 @@
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
-PR_GIT_UPDATE=1
-
-setopt prompt_subst
-
-autoload -U add-zsh-hook
-autoload -Uz vcs_info
 
 #use extended color pallete if available
 if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
@@ -45,32 +39,30 @@ KEL_HOST=""
 KEL_GIT_PREFIX="🌀"
 KEL_GIT_BRANCH=" on %{$turquoise%}%b%u%c${PR_RST}"
 KEL_GIT_ACTION=" performing a %{$limegreen%}%a${PR_RST}"
-KEL_GIT_UNSTAGED="%{$orange%} ●%{$reset_color%}"
-KEL_GIT_STAGED="%{$limegreen%} ●%{$reset_color%}"
-KEL_GIT_BEHIND=" 🔽%{$reset_color%}"
-KEL_GIT_AHEAD=" 🔼%{$reset_color%}"
-KEL_GIT_CLEAN=" ✅%{$reset_color%}"
-KEL_GIT_UNMERGED="%{$fg_bold[red]%} ●%{$reset_color%}"
-KEL_GIT_DIVERGED="%{$fg_bold[yellow]%} ↔️%{$reset_color%}"
-KEL_GIT_STASHED=" 📦%{$reset_color%}"
+KEL_GIT_UNSTAGED="🔸"
+KEL_GIT_UNTRACKED="💠"
+KEL_GIT_STAGED="🔹"
+KEL_GIT_BEHIND="🔽"
+KEL_GIT_AHEAD="🔼"
+KEL_GIT_CLEAN="✅"
+KEL_GIT_UNMERGED="🔴"
+KEL_GIT_DIVERGED="🔃"
+KEL_GIT_STASHED="📦"
 
 # Docker
 keloran_get_docker_host() {  
     local _docker=$DOCKER_HOST
     local _ldocker="local"
-    local _docker_local="${KEL_WHALE}  %{$fg_bold[cyan]%}$_ldocker%{$reset_color%} "
-    local _docker_remote="${KEL_WHALE}  %{$fg_bold[red]%}$_docker%{$reset_color%} "
+    local _docker_local="${KEL_WHALE}  %{$fg_bold[cyan]%}$_ldocker"
+    local _docker_remote="${KEL_WHALE}  %{$fg_bold[red]%}$_docker"
     local _docker_status="$_docker_remote"
 
     if [[ -z "$_docker" ]]; then
         _docker_status="$_docker_local"
     fi
     
-    echo "${_docker_status}"
+    echo "${_docker_status} $KEL_CLEAN"
 }
-
-# enable VCS systems you use
-zstyle ':vcs_info:*' enable git svn
 
 # GIT
 keloran_git_status() {
@@ -80,58 +72,62 @@ keloran_git_status() {
   # Files
   if [[ -n $_INDEX ]]; then
     if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
-      _STATUS="$_STATUS$FMT_STAGED"
+        _STATUS="$_STATUS$KEL_GIT_STAGED"
     fi
     
     if $(echo "$_INDEX" | command grep -q '^.[MTD] '); then
-      _STATUS="$_STATUS$FMT_UNSTAGED"
+        _STATUS="$_STATUS$KEL_GIT_UNSTAGED"
     fi
     
     if $(echo "$_INDEX" | command grep -q '^UU '); then
-      _STATUS="$_STATUS$FMT_UNMERGED"
+        _STATUS="$_STATUS$KEL_GIT_UNMERGED"
     fi    
+    
+    if $(echo "$_INDEX" | command grep -q -E '^\?\? '); then
+        _STATUS="$_STATUS$KEL_GIT_UNTRACKED"
+    fi
   else
-    _STATUS="$_STATUS$FMT_CLEAN"
+      _STATUS="$_STATUS$KEL_GIT_CLEAN"
   fi
   
   # Repo
   _INDEX=$(command git status --porcelain -b 2> /dev/null)
   if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
-    _STATUS="$_STATUS$FMT_AHEAD"
+      _STATUS="$_STATUS$KEL_GIT_AHEAD"
   fi
   
   if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
-    _STATUS="$_STATUS$FMT_BEHIND"
+      _STATUS="$_STATUS$KEL_GIT_BEHIND"
   fi
   
   if $(echo "$_INDEX" | command grep -q '^## .*diverged'); then
-    _STATUS="$_STATUS$FMT_DIVERGED"
+      _STATUS="$_STATUS$KEL_GIT_DIVERGED"
   fi
   
   if $(command git rev-parse --verify refs/stash &> /dev/null); then
-    _STATUS="$_STATUS$FMT_STASHED"
+      _STATUS="$_STATUS$KEL_GIT_STASHED"
   fi
   
-  echo $_STATUS
+  echo " $_STATUS"
 }
 
-keloran_git_branch() {
+keloran_git_branch() {    
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-  echo "%{$turquoise%}${ref#refs/heads/}"
+  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return  
+  echo "${ref#refs/heads/}"
 }
 
 keloran_git_prompt() {
-  local _branch=$(keloran_git_branch)
+  local _branch=$(keloran_git_branch)  
   local _status=$(keloran_git_status)
   local _result=""
   
-  if [[ "${_branch}x" != "x" ]]; then
-    _result="$KEL_GIT_PREFIX  %{$fg[blue]%}$_branch"
+  if [[ "${_branch}x" != "x" ]]; then      
+    _result="$KEL_GIT_PREFIX  %{$fg[cyan]%}$_branch"
     if [[ "${_status}x" != "x" ]]; then
       _result="$_result$_status"
     fi
-    _result="$_result$KEL_CLEAN"
+    _result=" on $_result$KEL_CLEAN "
   fi
   
   echo $_result
@@ -144,37 +140,41 @@ keloran_get_space() {
   local SPACES=""
   (( LENGTH = ${COLUMNS} - $LENGTH - 1))
   
-  for i in {0..$LENGTH}
-  do
-    SPACES="$SPACES "
-  done
+  # for i in {0..$LENGTH}
+  # do
+  #   SPACES="$SPACES "
+  # done
   
   echo $SPACES
 }
 
 keloran_get_machine() {
-  local _loc_machine="%{$hotpink%}%m%{$reset_color%}::%{$purple%}%n%{$reset_color%}"
+  local _loc_machine="%{$hotpink%}%m%{$reset_color%}::%{$purple%}%n$KEL_CLEAN"
   echo $_loc_machine
 }
 
 keloran_get_location() {
-    local _root=$PWD
-    while [[ $_root != / && ! -e $_root/.git ]]; do
-        _root=$_root:h
+    pwd_root=$PWD
+    while [[ $pwd_root != / && ! -e $pwd_root/.git ]]; do
+        pwd_root=$pwd_root:h
     done
-    if [[ $_root = / ]]; then
-        unset $_root
+    if [[ $pwd_root = / ]]; then
+        unset $pwd_root
         prompt_short_dir=%~
     else
-        parent=${_root%\/*}
+        parent=${pwd_root%\/*}
         prompt_short_dir=${PWD#$parent/}
     fi
-    echo "%{$limegreen%}$prompt_short_dir%{$reset_color%}"
+    echo " in %{$limegreen%}$prompt_short_dir$KEL_CLEAN"
 }
 
 function keloran_precmd {
+    _SPACES=`keloran_get_space`
 }
-add-zsh-hook precmd keloran_precmd
 
-PROMPT="$(keloran_get_machine) in $(keloran_get_location) on $(keloran_git_prompt) $KEL_SUFFIX"
+setopt prompt_subst
+PROMPT='$(keloran_get_machine)$(keloran_get_location)$(keloran_git_prompt) $KEL_SUFFIX'
 RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host)[%*]'
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd keloran_precmd
