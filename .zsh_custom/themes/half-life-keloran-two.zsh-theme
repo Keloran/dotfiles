@@ -32,16 +32,34 @@ else
     limegreen="$fg[green]"
 fi
 
+# Globals
+KEL_WHALE="🐳"
+KEL_CLEAN="%{$reset_color%}"
+
+KEL_SUFFIX="%{$orange%}λ$KEL_CLEAN "
+
+KEL_TIME="[%*]"
+
+KEL_HOST=""
+
+KEL_GIT_PREFIX="🌀"
+KEL_GIT_BRANCH=" on %{$turquoise%}%b%u%c${PR_RST}"
+KEL_GIT_ACTION=" performing a %{$limegreen%}%a${PR_RST}"
+KEL_GIT_UNSTAGED="%{$orange%} ●%{$reset_color%}"
+KEL_GIT_STAGED="%{$limegreen%} ●%{$reset_color%}"
+KEL_GIT_BEHIND=" 🔽%{$reset_color%}"
+KEL_GIT_AHEAD=" 🔼%{$reset_color%}"
+KEL_GIT_CLEAN=" ✅%{$reset_color%}"
+KEL_GIT_UNMERGED="%{$fg_bold[red]%} ●%{$reset_color%}"
+KEL_GIT_DIVERGED="%{$fg_bold[yellow]%} ↔️%{$reset_color%}"
+KEL_GIT_STASHED=" 📦%{$reset_color%}"
+
 # Docker
-keloran_get_docker_host() {
-    ZSH_WHALE="🐳"
-    DOCKER_LOCAL_COLOR="blue"
-    DOCKER_REMOTE_COLOR="red"
-  
+keloran_get_docker_host() {  
     local _docker=$DOCKER_HOST
     local _ldocker="local"
-    local _docker_local="${ZSH_WHALE}  %{$fg_bold[$DOCKER_LOCAL_COLOR]%}$_ldocker%{$reset_color%} "
-    local _docker_remote="${ZSH_WHALE}  %{$fg_bold[$DOCKER_REMOTE_COLOR]%}$_docker%{$reset_color%} "
+    local _docker_local="${KEL_WHALE}  %{$fg_bold[cyan]%}$_ldocker%{$reset_color%} "
+    local _docker_remote="${KEL_WHALE}  %{$fg_bold[red]%}$_docker%{$reset_color%} "
     local _docker_status="$_docker_remote"
 
     if [[ -z "$_docker" ]]; then
@@ -54,92 +72,109 @@ keloran_get_docker_host() {
 # enable VCS systems you use
 zstyle ':vcs_info:*' enable git svn
 
-# check-for-changes can be really slow.
-# you should disable it, if you work with large repositories
-zstyle ':vcs_info:*:prompt:*' check-for-changes true
-
-# set formats
-# %b - branchname
-# %u - unstagedstr (see below)
-# %c - stagedstr (see below)
-# %a - action (e.g. rebase-i)
-# %R - repository path
-# %S - path in the repository
-PR_RST="%{${reset_color}%}"
-FMT_BRANCH=" on %{$turquoise%}%b%u%c${PR_RST}"
-FMT_ACTION=" performing a %{$limegreen%}%a${PR_RST}"
-FMT_UNSTAGED="%{$orange%} ●"
-FMT_STAGED="%{$limegreen%} ●"
-
-zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
-zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
-zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
-zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
-zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
-
-function keloran_get_pwd() {
-	git_root=$PWD
-	while [[ $git_root != / && ! -e $git_root/.git ]]; do
-		git_root=$git_root:h
-	done
-	if [[ $git_root = / ]]; then
-		unset $git_root
-		prompt_short_dir=%~
-	else
-		parent=${git_root%\/*}
-		prompt_short_dir=${PWD#$parent/}
-	fi
-	echo $prompt_short_dir
+# GIT
+keloran_git_status() {
+  _STATUS=""
+  _INDEX=$(command git status --porcelain 2> /dev/null)
+  
+  # Files
+  if [[ -n $_INDEX ]]; then
+    if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
+      _STATUS="$_STATUS$FMT_STAGED"
+    fi
+    
+    if $(echo "$_INDEX" | command grep -q '^.[MTD] '); then
+      _STATUS="$_STATUS$FMT_UNSTAGED"
+    fi
+    
+    if $(echo "$_INDEX" | command grep -q '^UU '); then
+      _STATUS="$_STATUS$FMT_UNMERGED"
+    fi    
+  else
+    _STATUS="$_STATUS$FMT_CLEAN"
+  fi
+  
+  # Repo
+  _INDEX=$(command git status --porcelain -b 2> /dev/null)
+  if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
+    _STATUS="$_STATUS$FMT_AHEAD"
+  fi
+  
+  if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
+    _STATUS="$_STATUS$FMT_BEHIND"
+  fi
+  
+  if $(echo "$_INDEX" | command grep -q '^## .*diverged'); then
+    _STATUS="$_STATUS$FMT_DIVERGED"
+  fi
+  
+  if $(command git rev-parse --verify refs/stash &> /dev/null); then
+    _STATUS="$_STATUS$FMT_STASHED"
+  fi
+  
+  echo $_STATUS
 }
 
-function keloran_preexec {
-    case "$(history $HISTCMD)" in
-        *git*)
-            PR_GIT_UPDATE=1
-            ;;
-        *svn*)
-            PR_GIT_UPDATE=1
-            ;;
-    esac
+keloran_git_branch() {
+  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  echo "%{$turquoise%}${ref#refs/heads/}"
 }
-add-zsh-hook preexec keloran_preexec
 
-function keloran_chpwd {
-    PR_GIT_UPDATE=1
+keloran_git_prompt() {
+  local _branch=$(keloran_git_branch)
+  local _status=$(keloran_git_status)
+  local _result=""
+  
+  if [[ "${_branch}x" != "x" ]]; then
+    _result="$KEL_GIT_PREFIX  %{$fg[blue]%}$_branch"
+    if [[ "${_status}x" != "x" ]]; then
+      _result="$_result$_status"
+    fi
+    _result="$_result$KEL_CLEAN"
+  fi
+  
+  echo $_result
 }
-add-zsh-hook chpwd keloran_chpwd
+
+keloran_get_space() {
+  local STR=$1$2
+  local zero='%([BSUbfksu]|([FB]|){*})'
+  local LENGTH=${#${(S%%)STR//$~zero/}}
+  local SPACES=""
+  (( LENGTH = ${COLUMNS} - $LENGTH - 1))
+  
+  for i in {0..$LENGTH}
+  do
+    SPACES="$SPACES "
+  done
+  
+  echo $SPACES
+}
+
+keloran_get_machine() {
+  local _loc_machine="%{$hotpink%}%m%{$reset_color%}::%{$purple%}%n%{$reset_color%}"
+  echo $_loc_machine
+}
+
+keloran_get_location() {
+    local _root=$PWD
+    while [[ $_root != / && ! -e $_root/.git ]]; do
+        _root=$_root:h
+    done
+    if [[ $_root = / ]]; then
+        unset $_root
+        prompt_short_dir=%~
+    else
+        parent=${_root%\/*}
+        prompt_short_dir=${PWD#$parent/}
+    fi
+    echo "%{$limegreen%}$prompt_short_dir%{$reset_color%}"
+}
 
 function keloran_precmd {
-    if [[ -n "$PR_GIT_UPDATE" ]] ; then
-        # check for untracked files or updated submodules, since vcs_info doesn't
-        if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-            PR_GIT_UPDATE=1
-            FMT_BRANCH="${PM_RST} on %{$turquoise%}%b%u%c%{$hotpink%} ●${PR_RST}"
-        else
-            FMT_BRANCH="${PM_RST} on %{$turquoise%}%b%u%c${PR_RST}"
-        fi
-        zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
-
-        vcs_info 'prompt'
-        PR_GIT_UPDATE=
-    fi
 }
 add-zsh-hook precmd keloran_precmd
 
-keloran_get_location() {
-  local _loc_machine="%{$hotpink%}%m%{$reset_color%}::%{$purple%}%n%{$reset_color%}"
-  local _loc_path="in %{$limegreen%}$(keloran_get_pwd)%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_"
-  HL_PROMPT="%{$orange%}λ%{$reset_color%} "
-  
-  echo "${_loc_machine} ${_loc_path} $HL_PROMPT"
-}
-
-keloran_right() {
-    local _left='$(nvm_prompt_info) $(keloran_get_docker_host)'
-    local _right="[%*] "
-    _SPACE="$(keloran_get_space) $_left $_right"
-    echo "$_left$_SPACE$_right"
-}
-
-PROMPT='$(keloran_get_location)'
+PROMPT="$(keloran_get_machine) in $(keloran_get_location) on $(keloran_git_prompt) $KEL_SUFFIX"
 RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host)[%*]'
