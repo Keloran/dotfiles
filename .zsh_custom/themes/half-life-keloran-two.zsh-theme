@@ -37,7 +37,6 @@ KEL_TIME="[%*]"
 KEL_HOST=""
 
 KEL_GIT_PREFIX="🌀"
-KEL_GIT_BRANCH=" on %{$turquoise%}%b%u%c${PR_RST}"
 KEL_GIT_ACTION=" performing a %{$limegreen%}%a${PR_RST}"
 KEL_GIT_UNSTAGED="🔸"
 KEL_GIT_UNTRACKED="💠"
@@ -50,7 +49,7 @@ KEL_GIT_DIVERGED="🔃"
 KEL_GIT_STASHED="📦"
 
 # Docker
-keloran_get_docker_host() {  
+keloran_get_docker_host() {
     local _docker=$DOCKER_HOST
     local _ldocker="local"
     local _docker_local="${KEL_WHALE}  %{$fg_bold[cyan]%}$_ldocker"
@@ -60,7 +59,7 @@ keloran_get_docker_host() {
     if [[ -z "$_docker" ]]; then
         _docker_status="$_docker_local"
     fi
-    
+
     echo "${_docker_status} $KEL_CLEAN"
 }
 
@@ -68,68 +67,88 @@ keloran_get_docker_host() {
 keloran_git_status() {
   _STATUS=""
   _INDEX=$(command git status --porcelain 2> /dev/null)
-  
+
+  local _staged=false
+  local _unstaged=false
+  local _unmerged=false
+
   # Files
   if [[ -n $_INDEX ]]; then
     if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
         _STATUS="$_STATUS$KEL_GIT_STAGED"
+        _staged=true
     fi
-    
+
     if $(echo "$_INDEX" | command grep -q '^.[MTD] '); then
+      _unstaged=true
+      if [[ _staged ]]; then
+        _STATUS="$_STATUS $KEL_GIT_UNSTAGED"
+      else
         _STATUS="$_STATUS$KEL_GIT_UNSTAGED"
+      fi
     fi
-    
+
     if $(echo "$_INDEX" | command grep -q '^UU '); then
+      _unmerged=true
+
+      if [[ _unstaged ]]; then
+        _STATUS="$_STATUS $KEL_GIT_UNMERGED"
+      else
         _STATUS="$_STATUS$KEL_GIT_UNMERGED"
-    fi    
-    
+      fi
+    fi
+
     if $(echo "$_INDEX" | command grep -q -E '^\?\? '); then
+      if [[ _unmerged ]]; then
+        _STATUS="$_STATUS $KEL_GIT_UNTRACKED"
+      else
         _STATUS="$_STATUS$KEL_GIT_UNTRACKED"
+      fi
     fi
   else
       _STATUS="$_STATUS$KEL_GIT_CLEAN"
   fi
-  
+
   # Repo
   _INDEX=$(command git status --porcelain -b 2> /dev/null)
   if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
       _STATUS="$_STATUS $KEL_GIT_AHEAD"
   fi
-  
+
   if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
       _STATUS="$_STATUS $KEL_GIT_BEHIND"
   fi
-  
+
   if $(echo "$_INDEX" | command grep -q '^## .*diverged'); then
       _STATUS="$_STATUS $KEL_GIT_DIVERGED"
   fi
-  
+
   if $(command git rev-parse --verify refs/stash &> /dev/null); then
       _STATUS="$_STATUS $KEL_GIT_STASHED"
   fi
-  
+
   echo " $_STATUS"
 }
 
-keloran_git_branch() {    
+keloran_git_branch() {
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return  
+  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
   echo "${ref#refs/heads/}"
 }
 
 keloran_git_prompt() {
-  local _branch=$(keloran_git_branch)  
+  local _branch=$(keloran_git_branch)
   local _status=$(keloran_git_status)
   local _result=""
-  
-  if [[ "${_branch}x" != "x" ]]; then      
+
+  if [[ "${_branch}x" != "x" ]]; then
     _result="$KEL_GIT_PREFIX  %{$fg[cyan]%}$_branch"
     if [[ "${_status}x" != "x" ]]; then
       _result="$_result$_status"
     fi
-    _result=" on $_result$KEL_CLEAN "
+    _result=" on $_result $KEL_CLEAN"
   fi
-  
+
   echo $_result
 }
 
@@ -139,12 +158,12 @@ keloran_get_space() {
   local LENGTH=${#${(S%%)STR//$~zero/}}
   local SPACES=""
   (( LENGTH = ${COLUMNS} - $LENGTH - 1))
-  
+
   # for i in {0..$LENGTH}
   # do
   #   SPACES="$SPACES "
   # done
-  
+
   echo $SPACES
 }
 
