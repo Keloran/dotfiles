@@ -3,10 +3,15 @@
 # Network
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+# Mouse
+defaults -currentHost write com.apple.mouse.tapBehavior -int 1
+defaults write.com.apple.mouse.tapBehavior -int 1
+defaults write.com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string TwoButton
+defaults write.com.apple.AppleHIDMouse Button2 -int 2
+
 # Trackpad
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write com.apple.mouse.tapBehavior -int 1
-defaults write com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 1
 
 # Screen
 defaults write com.apple.screensaver askForPassword -int 1
@@ -41,6 +46,11 @@ killall Safari > /dev/null 2>&1
 defaults write com.apple.dashboard mxc-disabled -bool true
 defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock mru-spaces -bool false
+
+# Session
+if [ -f "$HOME/Library/Preferences/.GlobalPreferences" ]; then
+    defaults write $HHOME/Library/Preferences/.GlobalPreferences NSQuitAlwaysKeepWindows -bool true
+fi
 
 # Spotlight
 defaults write com.apple.spotlight orderedItems -array \

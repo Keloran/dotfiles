@@ -60,11 +60,17 @@ sub_apps () {
     echo "Brew Installed"
 }
 
+sub_ssh () {
+    sh -c $DOTFILES_DIR/installs/osx/ssh.sh
+    echo "SSH Enabled"
+}
+
 sub_full () {
     sub_apps
     sub_cli
     sub_osx
     sub_dock
+    sub_ssh
     sub_reload
 }
 
