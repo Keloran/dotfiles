@@ -56,7 +56,13 @@ keloran_get_docker_host() {
     local _docker_remote="${KEL_WHALE}  %{$fg_bold[red]%}$_docker"
     local _docker_status="$_docker_remote"
 
-    if [[ -z "$_docker" ]]; then
+    # No Docker at all
+    if [[ -z $_docker ]]; then
+        _docker_status=""
+    fi
+
+    # Local Docker
+    if [ -e "/var/run/docker.sock" ]; then
         _docker_status="$_docker_local"
     fi
 
