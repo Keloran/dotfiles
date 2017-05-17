@@ -6,6 +6,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 # Taps
 brew tap homebrew/homebrew-games
 brew tap homebrew/homebrew-dupes
+brew tap caskroom/fonts
 
 # Update brew
 brew update
@@ -61,6 +62,11 @@ brew cask install shuttle
 brew cask install sqlitebrowser
 brew cask install slack
 brew cask install the-unarchiver
+
+# Fonts
+brew cask install font-consolas-for-powerline
+brew cask install font-menlo-for-powerline
+brew cask install font-source-code-pro-for-powerline
 
 # Cleanup
 brew cask cleanup
