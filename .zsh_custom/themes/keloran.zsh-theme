@@ -230,7 +230,11 @@ keloran_get_space() {
 # General
 keloran_get_machine() {
   prompt_segment 161 default "%m"
-  prompt_segment 124 default "%n"
+  
+  local user=`whoami`
+  if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CONNECTION" ]]; then
+   prompt_segment 124 default " %(!.%{%F{yellow}%}.)$user"
+ fi
 }
 
 keloran_get_location() {
@@ -279,13 +283,18 @@ function keloran_command() {
     end_prompt
 }
 
+keloran_remote() {
+    if [[ $SSH_CONNECTION ]]; then
+        echo ":: %{$limegreen%}Remote Server$KEL_CLEAN"
+    fi
+}
+
 function keloran_precmd {
     _SPACES=`keloran_get_space`
     
     setopt prompt_subst
-    #PROMPT='$(keloran_get_jobs)$(keloran_get_machine)$(keloran_get_location)$(keloran_git_prompt)$(end_prompt)$KEL_CLEAN'
     PROMPT='$(keloran_command)$KEL_CLEAN'
-    RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host)[%*]'
+    RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host)$(keloran_remote)[%*]'
 }
 
 kel_setup() {
