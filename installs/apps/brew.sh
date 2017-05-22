@@ -33,6 +33,7 @@ brew install wget
 brew install go
 brew install python
 brew install dnsmasq
+brew install cask
 
 # Brew Casks
 brew cask install aerial
