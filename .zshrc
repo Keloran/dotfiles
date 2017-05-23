@@ -49,7 +49,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z osx brew-cask sudo pod brew common-aliases docker docker-compose aws go golang)
+plugins=(git osx sudo common-aliases)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/hootonm/Documents/Tools/blog-utilities/bin:/usr/local/opt/go/libexec/bin"
@@ -94,3 +94,24 @@ fi
 if [ -f ~/.functions ]; then
     source ~/.functions
 fi
+
+# ZPlug
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "desyncr/auto-ls", from:github
+zplug "kingsj/atom_plugin.zsh", from:github
+zplug "djui/alias-tips", from:github
+
+zplug "webyneter/docker-aliases", use:docker-aliases.plugin.zsh
+
+zplug "plugins/z", from:oh-my-zsh
+zplug "plugins/branch-manager", from:oh-my-zsh
+zplug "plugins/brew-cask", from:oh-my-zsh
+zplug "plugins/pod", from:oh-my-zsh
+zplug "plugins/brew", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/docker-compose", from:oh-my-zsh
+zplug "plugins/aws", from:oh-my-zsh
+zplug "plugins/go", from:oh-my-zsh
+zplug "plugins/golang", from:oh-my-zsh

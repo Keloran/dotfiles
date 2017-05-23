@@ -34,6 +34,7 @@ brew install go
 brew install python
 brew install dnsmasq
 brew install cask
+brew install zplug
 
 # Brew Casks
 brew cask install aerial
