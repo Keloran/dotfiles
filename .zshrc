@@ -99,11 +99,13 @@ fi
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-zplug "desyncr/auto-ls", from:github
-zplug "kingsj/atom_plugin.zsh", from:github
-zplug "djui/alias-tips", from:github
-
+zplug "desyncr/auto-ls"
+zplug "kingsj/atom_plugin.zsh"
+zplug "djui/alias-tips"
+zplug "bric3/nice-exit-code", use:nice-exit-code.plugin.zsh
 zplug "webyneter/docker-aliases", use:docker-aliases.plugin.zsh
+zplug "bbenne10/goenv", use:goenv.plugin.zsh
+zplug "chrissicool/zsh-256color", use:zsh-256color.plugin.zsh
 
 zplug "plugins/z", from:oh-my-zsh
 zplug "plugins/branch-manager", from:oh-my-zsh
@@ -115,3 +117,9 @@ zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/aws", from:oh-my-zsh
 zplug "plugins/go", from:oh-my-zsh
 zplug "plugins/golang", from:oh-my-zsh
+
+zplug load
+
+# GO
+export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
+export GO_ENV=~/.goenvs

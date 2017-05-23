@@ -273,9 +273,17 @@ keloran_get_jobs() {
   fi
 }
 
+keloran_nice_exit() {
+    local _nice=$(nice_exit_code)
+    if [ $_nice ]; then
+        prompt_segment 45 default $_nice
+    fi
+}
+
 function keloran_command() {
     RETVAL=$?
     CURRENT_BG='NONE'
+    keloran_nice_exit
     keloran_get_jobs
     keloran_get_machine
     keloran_get_location
