@@ -104,6 +104,17 @@ end_prompt() {
   CURRENT_BG=''
 }
 
+extra_segment() {
+    local bg
+    if [[ -n $1 ]]; then
+      bg="%K{161}"
+    else
+      bg="%k"
+    fi
+    
+    print -n "%{$bg%F{$1}%}$KEL_SEGMENT"
+}
+
 # Docker
 keloran_get_docker_host() {
     local _docker=$DOCKER_HOST
@@ -274,16 +285,16 @@ keloran_get_jobs() {
 }
 
 keloran_nice_exit() {
-    local _nice=$(nice_exit_code)
-    if [ $_nice ]; then
-        prompt_segment 45 default $_nice
+    local _fail=$(nice_exit_code)
+    if [[ -n "${_fail}" ]]; then
+        prompt_segment 99 default $_fail
+        extra_segment 99
     fi
 }
 
 function keloran_command() {
     RETVAL=$?
     CURRENT_BG='NONE'
-    keloran_nice_exit
     keloran_get_jobs
     keloran_get_machine
     keloran_get_location
@@ -301,7 +312,7 @@ function keloran_precmd {
     _SPACES=`keloran_get_space`
     
     setopt prompt_subst
-    PROMPT='$(keloran_command)$KEL_CLEAN'
+    PROMPT='$(keloran_nice_exit)$(keloran_command)$KEL_CLEAN'
     RPROMPT='$(nvm_prompt_info) $(keloran_get_docker_host)$(keloran_remote)[%*]'
 }
 
