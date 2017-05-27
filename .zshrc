@@ -102,7 +102,7 @@ source $ZPLUG_HOME/init.zsh
 zplug "desyncr/auto-ls"
 zplug "kingsj/atom_plugin.zsh"
 zplug "djui/alias-tips"
-zplug "bric3/nice-exit-code", use:nice-exit-code.plugin.zsh
+zplug "bric3/nice-exit-code"
 zplug "webyneter/docker-aliases", use:docker-aliases.plugin.zsh
 zplug "bbenne10/goenv", use:goenv.plugin.zsh
 zplug "chrissicool/zsh-256color", use:zsh-256color.plugin.zsh
