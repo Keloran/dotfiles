@@ -69,6 +69,7 @@ brew cask install the-unarchiver
 brew cask install font-consolas-for-powerline
 brew cask install font-menlo-for-powerline
 brew cask install font-source-code-pro-for-powerline
+brew cask install font-hack-nerd-font
 
 # Cleanup
 brew cask cleanup
