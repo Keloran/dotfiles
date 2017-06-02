@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 defaults write com.apple.dock show-process-indicators -bool true
+defaults write com.apple.dock tilesize -int 36
+
+# HotCorner
+defaults write com.apple.dock wvous-br-corner -int 5
+defaults write com.apple.dock wvous-br-modifier -int 0
 
 dockutil --no-restart --remove all
 dockutil --no-restart --add "/Applications/Safari.app"

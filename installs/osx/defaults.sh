@@ -69,3 +69,10 @@ defaults write com.apple.spotlight orderedItems -array \
 	'{"enabled" = 0;"name" = "MOVIES";}' \
 	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
 	'{"enabled" = 0;"name" = "SOURCE";}'
+
+# Photos
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+# AirDrop
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+

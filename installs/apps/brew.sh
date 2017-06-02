@@ -4,72 +4,85 @@
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Taps
-brew tap homebrew/homebrew-games
-brew tap homebrew/homebrew-dupes
-brew tap caskroom/fonts
+modules="
+    homebrew/homebrew-games
+    homebrew/homebrew-dupes
+    caskroom/fonts
+"
+for module in $modules; do
+    brew tap "$modules"
+done
 
 # Update brew
 brew update
 brew upgrade
 
 # Default Brews
-brew install awscli
-brew install boost --universal
-brew install carthage
-brew install cmake
-grew install docker-clean
-brew install git-extras
-brew install gpg-agent
-brew install gnupg2
-brew install htop-osx
-brew install multitail
-brew install nmap
-brew install node
-brew install openal-soft --universal
-brew install ssh-copy-id
-brew install tree
-brew install watch
-brew install wget
-brew install go
-brew install python
-brew install dnsmasq
-brew install cask
-brew install zplug
+modules="
+    awscli
+    boost --universal
+    carthage
+    cmake
+    docker-clean
+    git-extras
+    gpg-agent
+    gnupg2
+    htop-osx
+    multitail
+    nmap
+    node
+    openal-soft --universal
+    ssh-copy-id
+    tree
+    watch
+    wget
+    python
+    dnsmasq
+    cask
+    zplug
+"
+for module in $modules; do
+    brew install "$module"
+done
 
 # Brew Casks
-brew cask install aerial
-brew cask install alcatraz
-brew cask install alfred
-brew cask install atom
-brew cask install bartender
-brew cask install bettertouchtool
-brew cask install clion
-brew cask install cocoapods
-brew cask install dbeaver-enterprise
-brew cask install disk-inventory-x
-brew cask install docker
-brew cask install dropbox
-brew cask install flux
-brew cask install gas-mask
-brew cask install gpgtools
-brew cask install hipchat
-brew cask install intellij-idea
-brew cask install istat-menus
-brew cask install iterm2
-brew cask install knockknock
-brew cask install moom
-brew cask install paw
-brew cask install sequel-pro
-brew cask install shuttle
-brew cask install sqlitebrowser
-brew cask install slack
-brew cask install the-unarchiver
+modules="
+    aerial
+    alcatraz
+    alfred
+    atom
+    bartender
+    bettertouchtool
+    clion
+    cocoapods
+    disk-inventory-x
+    docker
+    dropbox
+    gas-mask
+    gpgtools
+    hipchat
+    intellij-idea
+    istat-menus
+    iterm2
+    moom
+    paw
+    shuttle
+    slack
+"
+for module in $modules; do
+    brew cask install "$module"
+done
 
 # Fonts
-brew cask install font-consolas-for-powerline
-brew cask install font-menlo-for-powerline
-brew cask install font-source-code-pro-for-powerline
-brew cask install font-hack-nerd-font
+modules="
+    font-consolas-for-powerline
+    font-menlo-for-powerline
+    font-source-code-pro-for-powerline
+    font-hack-nerd-font
+"
+for module in $modules; do
+    brew cask install "$module"
+done
 
 # Cleanup
 brew cask cleanup
