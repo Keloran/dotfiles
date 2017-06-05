@@ -40,6 +40,7 @@ modules="
     dnsmasq
     cask
     zplug
+    tmux
 "
 for module in $modules; do
     brew install "$module"
