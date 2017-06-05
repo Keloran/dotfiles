@@ -49,7 +49,6 @@ done
 # Brew Casks
 modules="
     aerial
-    alcatraz
     alfred
     atom
     bartender
