@@ -10,7 +10,7 @@ modules="
     caskroom/fonts
 "
 for module in $modules; do
-    brew tap "$modules"
+    brew tap "$module"
 done
 
 # Update brew
