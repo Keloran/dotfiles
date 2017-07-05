@@ -41,6 +41,7 @@ modules="
     cask
     zplug
     tmux
+    z
 "
 for module in $modules; do
     brew install "$module"
@@ -68,6 +69,7 @@ modules="
     paw
     shuttle
     slack
+    hyper
 "
 for module in $modules; do
     brew cask install "$module"

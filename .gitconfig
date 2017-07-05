@@ -21,6 +21,8 @@
 		pushit = !"git push -u origin $(git rev-parse --abbrev-ref HEAD)"
 		ticket = !"git checkout -b $2"
 		master = !"git checkout master && git pull"
+[credential]
+    helper = osxkeychain
 [color]
     branch = auto
     diff = auto

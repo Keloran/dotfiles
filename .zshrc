@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+# Z
+. /usr/local/etc/profile.d/z.sh
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -123,3 +126,7 @@ zplug load
 # GO
 export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
 export GO_ENV=~/.goenvs
+
+# Node
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
