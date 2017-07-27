@@ -22,7 +22,7 @@ dockerRemoveDangling()
 
 dockerUpdateAll()
 {
-  docker images --format '{{.Repository}} {{.Tag}}' | awk '{print $1 \":\" $2}' | grep -iv 'repository' | xargs -L1 docker pull
+  docker images --format '{{.Repository}} {{.Tag}}' | awk '{print $1 ":" $2}' | grep -iv 'repository' | xargs -L1 docker pull
 }
 
 dockerPsClean()
