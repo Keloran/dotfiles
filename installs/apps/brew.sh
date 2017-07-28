@@ -42,6 +42,7 @@ modules="
     zplug
     tmux
     z
+    editorconfig
 "
 for module in $modules; do
     brew install "$module"
