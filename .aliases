@@ -7,3 +7,4 @@ alias docker-stop="dockerStop"
 alias docker-logs="docker-compose logs -f"
 alias docker-restart="docker-stop && docker-start"
 alias updatedb="sudo /usr/libexec/locate.updatedb"
+

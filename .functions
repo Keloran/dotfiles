@@ -38,15 +38,25 @@ dockerUI()
 dockerStart()
 {
     dockerStop
-    docker-compose build
-    docker-compose up -d
-    docker-compose ps
+    if [[ -z $(pwd)/docker-compose.yml ]]; then
+        docker build -t $(pwd) .
+        docker up --rm -d -it $(pwd) --name $(pwd)_build
+        docker ps -a
+    else
+        docker-compose build
+        docker-compose up -d
+        docker-compose ps
+    fi
 }
 
 dockerStop()
 {
-    docker-compose stop
-    dockerPsClean
-    docker-compose ps
+    if [[ -z $(pwd)/docker-compose.yml ]]; then
+        docker stop $(pwd)_build
+        dockerPsClean
+    else
+        docker-compose stop
+        dockerPsClean
+    fi
 }
 
