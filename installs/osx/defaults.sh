@@ -48,7 +48,7 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Session
-if [ -f "$HOME/Library/Preferences/.GlobalPreferences" ]; then
+if [[ -f "$HOME/Library/Preferences/.GlobalPreferences" ]]; then
     defaults write $HHOME/Library/Preferences/.GlobalPreferences NSQuitAlwaysKeepWindows -bool true
 fi
 
@@ -75,4 +75,11 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # AirDrop
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+
+# Dark Mode
+if [[ -f "$HOME/Library/Preferenes/.GlobalPreferences" ]]; then
+    defaults write $HOME/Library/Preferences/.GlobalPrefences AppleInterfaceTheme Dark
+    killall Dock
+    killall SystemUIServer
+fi
 
