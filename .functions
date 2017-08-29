@@ -64,3 +64,29 @@ dockerStop()
     docker-clean
 }
 
+dockerExec()
+{
+    if [[ -e $(pwd)/docker-compose.yml ]]; then
+        if [[ -z $1 ]]; then
+            echo "You need to give me a server"
+        else
+            docker-compose exec $1 bash
+        fi
+    else
+        docker exec "${PWD##/}"_build bash
+    fi
+}
+
+dockerLogs()
+{
+    if [[ -e $(pwd)/docker-compose.yml ]]; then
+        if [[ -z $1 ]]; then
+            docker-compose logs -f
+        else
+            docker-compose logs -f $1
+        fi
+    else
+        docker logs -f
+    fi
+}
+

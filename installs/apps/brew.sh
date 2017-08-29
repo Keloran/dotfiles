@@ -71,6 +71,7 @@ modules="
     shuttle
     slack
     hyper
+    discord
 "
 for module in $modules; do
     brew cask install "$module"
