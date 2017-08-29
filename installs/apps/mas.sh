@@ -15,3 +15,9 @@ mas install 587769990
 # Pixelmator
 mas install 407963104
 
+# Deliveries
+mas install 924726344
+
+# Patterns
+mas install 429449079
+
