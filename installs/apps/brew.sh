@@ -43,6 +43,7 @@ modules="
     tmux
     z
     editorconfig
+    mas
 "
 for module in $modules; do
     brew install "$module"
