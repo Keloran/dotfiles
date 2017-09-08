@@ -73,6 +73,7 @@ modules="
     slack
     hyper
     discord
+    rider
 "
 for module in $modules; do
     brew cask install "$module"

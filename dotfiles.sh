@@ -9,14 +9,13 @@ cat EOF <<
     Usage: $BIN_NAME <command>
 
     Commands:
-        help               This help message
-        edit               Open dotfiles in editor ($EDITOR_ALT) and Git GUI ($GIT_GUI)
-        reload             Reload dotfiles
-        update             Update packages and pkg managers (OS, brew, npm, gem, pip)
-        osx                Apply OS X system defaults
-        dock               Apply OS X Dock settings
+        help             This help message
+        edit              Open dotfiles in editor ($EDITOR_ALT) and Git GUI ($GIT_GUI)
+        reload          Reload dotfiles
+        update         Update packages and pkg managers (OS, brew, npm, gem, pip)
+        osx              Apply OS X system defaults
         cli                Install CLI
-        apps               Install Apps
+        apps             Install Apps
         full               Install All of it
 EOF
 }
@@ -38,40 +37,62 @@ sub_update () {
 
 sub_osx () {
     sh -c $DOTFILES_DIR/installs/osx/defaults.sh
+    sh -c $DOTFILES_DIR/installs/osx/dock.sh
+    sh -c $DOTFILES_DIR/installs/osx/mds.sh
+    sh -c $DOTFILES_DIR/installs/osx/ssh.sh
+    echo "Installed OSX Stuff"
     echo "Done. Some changes may require a logout/restart to take effect."
 }
 
-sub_dock () {
-    sh -c $DOTFILES_DIR/installs/osx/dock.sh
-    echo "Dock reloaded."
+sub_cli () {
+    sh -c $DOTFILES_DIR/installs/cli/z.sh
+    echo "ZSH and Z Installed"
+
+    sh -c $DOTFILES_DIR/installs/cli/theme.sh
+    echo "ZSH Theme installed"
 }
 
-sub_cli () {
+sub_editor() {
     sh -c $DOTFILES_DIR/installs/cli/vundle.sh
     echo "Vundle Installed"
 
-    sh -c $DOTFILES_DIR/installs/cli/z.sh
-    echo "ZSH and Z Installed" 
+    sh -c $DOTFILES_DIR/installs/apps/atom.sh
+    echo "Atom Installed"
 }
 
 sub_apps () {
     sh -c $DOTFILES_DIR/installs/apps/xcode.sh
+    echo "XCode Intalled"
+
     sh -c $DOTFILES_DIR/installs/apps/brew.sh
     echo "Brew Installed"
+
+    sh -c $DOTFILES_DIR/installs/apps/mas.sh
+    echo "MAS Installed"
 }
 
-sub_ssh () {
-    sh -c $DOTFILES_DIR/installs/osx/ssh.sh
-    echo "SSH Enabled"
+sub_dots() {
+    cp $DOTFILES_DIR/.aliases $HOME/.aliases
+    cp $DOTFILES_DIR/.editorconfig $HOME/.editorconfig
+    cp $DOTFILES_DIR/.functions $HOME/.functions
+    cp $DOTFILES_DIR/.gitconfig $HOME/.gitconfig
+    cp $DOTFILES_DIR/.gitignore_global $HOME/.gitignore_global
+    cp $DOTFILES_DIR/.hyper.js $HOME/.hyper.js
+    cp $DOTFILES_DIR/.multitailrc $HOME/.multitailrc
+    cp $DOTFILES_DIR/.shuttle.json $HOME/.shuttle.json
+    cp $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
+    cp $DOTFILES_DIR/.zshrc $HOME/.zshrc
+
+    echo "Dots Installed"
 }
 
 sub_full () {
     sub_apps
     sub_cli
+    sub_editor
     sub_osx
-    sub_dock
-    sub_ssh
     sub_reload
+    sub_dots
 }
 
 sub_install () {
