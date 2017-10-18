@@ -5,7 +5,7 @@ COMMAND_NAME=$1
 SUB_COMMAND_NAME=$2
 
 sub_help () {
-cat EOF <<
+cat << EOF
     Usage: $BIN_NAME <command>
 
     Commands:

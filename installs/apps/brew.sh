@@ -20,7 +20,6 @@ brew upgrade
 # Default Brews
 modules="
     awscli
-    boost --universal
     carthage
     cmake
     docker-clean
@@ -31,7 +30,6 @@ modules="
     multitail
     nmap
     node
-    openal-soft --universal
     ssh-copy-id
     tree
     watch
@@ -48,6 +46,10 @@ modules="
 for module in $modules; do
     brew install "$module"
 done
+
+# Ones with options
+brew install boost --universal
+brew install openal-soft --universal
 
 # Brew Casks
 modules="
