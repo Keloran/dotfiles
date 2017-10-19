@@ -40,6 +40,7 @@ sub_osx() {
     sh -c $DOTFILES_DIR/installs/osx/dock.sh
     sh -c $DOTFILES_DIR/installs/osx/mds.sh
     sh -c $DOTFILES_DIR/installs/osx/ssh.sh
+    sh -c $DOTFILES_DIR/installs/osx/dns.sh
     echo "Installed OSX Stuff"
     echo "Done. Some changes may require a logout/restart to take effect."
 }
