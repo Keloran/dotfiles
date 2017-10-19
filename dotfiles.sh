@@ -9,23 +9,23 @@ cat << EOF
     Usage: $BIN_NAME <command>
 
     Commands:
-        help             This help message
-        edit              Open dotfiles in editor ($EDITOR_ALT) and Git GUI ($GIT_GUI)
-        reload          Reload dotfiles
+        help           This help message
+        edit           Open dotfiles in editor ($EDITOR_ALT) and Git GUI ($GIT_GUI)
+        reload         Reload dotfiles
         update         Update packages and pkg managers (OS, brew, npm, gem, pip)
-        osx              Apply OS X system defaults
-        cli                Install CLI
-        apps             Install Apps
-        full               Install All of it
+        osx            Apply OS X system defaults
+        cli            Install CLI
+        apps           Install Apps
+        full           Install All of it
 EOF
 }
 
-sub_edit () {
+sub_edit() {
     sh -c $EDITOR_ALT $DOTFILES_DIR
     sh -c $GIT_GUI $DOTFILES_DIR
 }
 
-sub_reload () {
+sub_reload() {
     source ~/.zshrc && echo "ZSH reloaded."
 }
 
@@ -35,7 +35,7 @@ sub_update () {
     brew upgrade
 }
 
-sub_osx () {
+sub_osx() {
     sh -c $DOTFILES_DIR/installs/osx/defaults.sh
     sh -c $DOTFILES_DIR/installs/osx/dock.sh
     sh -c $DOTFILES_DIR/installs/osx/mds.sh
@@ -44,7 +44,7 @@ sub_osx () {
     echo "Done. Some changes may require a logout/restart to take effect."
 }
 
-sub_cli () {
+sub_cli() {
     sh -c $DOTFILES_DIR/installs/cli/z.sh
     echo "ZSH and Z Installed"
 
@@ -84,28 +84,33 @@ sub_dots() {
     cp $DOTFILES_DIR/.multitailrc $HOME/.multitailrc
     cp $DOTFILES_DIR/.shuttle.json $HOME/.shuttle.json
     cp $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
-    cp $DOTFILES_DIR/.zshrc $HOME/.zshrc
 
     echo "Dots Installed"
 }
 
-sub_full () {
+sub_zsh_dot() {
+    cp $DOTFILES_DIR/.zshrc $HOME/.zshrc
+    echo "ZSH DotFile Installed"
+}
+
+sub_full() {
+    sub_dots
     sub_apps
     sub_cli
     sub_editor
     sub_osx
+    sub_zsh_dot
     sub_reload
-    sub_dots
 }
 
-sub_install () {
+sub_install() {
     local SCRIPT="$DOTFILES_DIR/installs/$SUB_COMMAND_NAME.sh"
     [ -f "$SCRIPT" ] && . "$SCRIPT" || echo "Unable to find script to install $SUB_COMMAND_NAME"
 }
 
 # Make sure to keep this in sync with the available public commands
 
-sub_completion () {
+sub_completion() {
     echo "help edit reload test update osx dock install"
 }
 

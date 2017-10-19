@@ -24,6 +24,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
 
 " Name conflicts
 Plugin 'L9'
@@ -98,8 +99,11 @@ set switchbuf=usetab
 nnoremap <F7> :sbnext<CR>
 nnoremap <S-F7> :sbprevious<CR>
 nmap <F8> :TagbarToggle<CR>
+nmap <S-F8> :TagbarOpenAutoClose<CR>
 nmap <F4> <Plug>CommentaryLine
 nmap md :InstantMarkdownPreview<CR>
+nmap <C-n> :NERDTreeToggle<CR>
+nmap <S-n> :NERDTreeFocus<CR>
 
 " Markdown
 let g:instant_markdown_autostart = 0
