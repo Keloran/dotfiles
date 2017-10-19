@@ -55,13 +55,15 @@ CASE_SENSITIVE="true"
 plugins=(git osx sudo common-aliases)
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/hootonm/Documents/Tools/blog-utilities/bin:/usr/local/opt/go/libexec/bin"
-export MAVEN_OPTS="-Djavax.net.ssl.trustStore=/Users/hootonm/.m2/cacerts-plus-artifactory.jks -Djavax.net.ssl.trustStorePassword=changeit"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/opt/go/libexec/bin:/usr/local/opt/python/libexec/bin:$PATH"
 export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.cargo/env
+
+if [[ -z $HOME/.cargo ]]; then
+    source $HOME/.cargo/env
+fi
 
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8
@@ -80,11 +82,17 @@ export LANG=en_GB.UTF-8
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # GPG
-if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
-    source ~/.gnupg/.gpg-agent-info
+#if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
+#    source ~/.gnupg/.gpg-agent-info
+#    export GPG_AGENT_INFO
+#else
+#    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+#fi
+# GPG
+if [[ -e ~/.gnupg/S.gpg-agent ]]; then
     export GPG_AGENT_INFO
 else
-    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+    eval $(gpg-agent --daemon)
 fi
 
 # Aliases
@@ -130,3 +138,21 @@ export GO_ENV=~/.goenvs
 # Node
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
+
+export GPG_TTY=$(tty)
+
+# PowerLine
+# function powerline_precmd() {
+    # PS1="$(powerline-shell --shell zsh $?)"
+# }
+# function install_powerline_precmd() {
+    # for s in "${precmd_functions[@]}"; do
+        # if [ "$s" = "powerline_precmd" ]; then
+            # return
+        # fi
+    # done
+    # precmd_functions+=(powerline_precmd)
+# }
+# if [ "$TERM" != "linux" ]; then
+    # install_powerline_precmd
+# fi

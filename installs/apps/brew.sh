@@ -97,4 +97,9 @@ brew cask cleanup
 brew cleanup
 
 # Python
-pip install --upgrade pip setuptools
+pip2 install --upgrade pip setuptools
+
+# Kryptonite
+brew install kryptco/tap/kr
+echo "n" | kr codesign
+

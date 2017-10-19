@@ -10,15 +10,19 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Language stuff
+Plugin 'gabrielelana/vim-markdown'
 Plugin 'instant-markdown.vim'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'pangloss/vim-javascript'
+Plugin 'majutsushi/tagbar'
 
 " Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'esneider/YUNOcommit.vim'
 
 " UI
-Plugin 'itchyny/lightline.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 
 " Name conflicts
@@ -27,18 +31,25 @@ Plugin 'L9'
 " Commands
 Plugin 'wincent/command-t'
 Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-sensible'
 
 " Spark Line
 Plugin 'rstacruz/sparkup',{'rtp':'vim/'}
 
 " Colors
-Plugin 'wombat256.vim'
+Plugin 'flazz/vim-colorschemes'
 
 " Auto complete
 Plugin 'ervandew/supertab'
 
 " EditorConfig
 Plugin 'editorconfig/editorconfig-vim'
+
+" Quotes
+Plugin 'tpope/vim-surround'
+
+" Comments
+Plugin 'tpope/vim-commentary'
 
 " Stop Vundle
 call vundle#end()
@@ -49,8 +60,9 @@ syntax on
 
 " Colors
 set laststatus=2
-let g:lightline = { 'colorscheme': 'wombat', }
-colorscheme wombat256mod
+let g:airline_theme = 'molokai'
+let g:airline_powerline_fonts = 1
+colorscheme molokai
 
 " VIM Stuffs
 if has("autocmd")
@@ -71,9 +83,6 @@ set paste
 
 syntax on
 
-" Line Numbers
-"set number
-
 " Mouse Scrolling
 set mouse=a
 
@@ -83,6 +92,14 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.json set autoindent filetype=javascript
     autocmd BufRead,BufNewFile *.md set filetype=markdown
 endif
+
+" Keys
+set switchbuf=usetab
+nnoremap <F7> :sbnext<CR>
+nnoremap <S-F7> :sbprevious<CR>
+nmap <F8> :TagbarToggle<CR>
+nmap <F4> <Plug>CommentaryLine
+nmap md :InstantMarkdownPreview<CR>
 
 " Markdown
 let g:instant_markdown_autostart = 0

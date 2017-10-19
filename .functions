@@ -53,7 +53,7 @@ dockerStop()
 {
     if [[ -e $(pwd)/docker-compose.yml ]]; then
         docker-compose stop
-        docker-compose rm
+        yes | docker-compose rm
         dockerPsClean
     else
         docker stop "${PWD##*/}"_build
@@ -69,6 +69,7 @@ dockerExec()
     if [[ -e $(pwd)/docker-compose.yml ]]; then
         if [[ -z $1 ]]; then
             echo "You need to give me a server"
+            docker-compose ps
         else
             docker-compose exec $1 bash
         fi
