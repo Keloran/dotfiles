@@ -10,15 +10,15 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Language stuff
-Plugin 'gabrielelana/vim-markdown'
 Plugin 'instant-markdown.vim'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'pangloss/vim-javascript'
 Plugin 'majutsushi/tagbar'
+Plugin 'sheerun/vim-polyglot'
 
 " Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'esneider/YUNOcommit.vim'
+Plugin 'tpope/vim-rhubarb'
+Plugin 'airblade/vim-gitgutter'
 
 " UI
 Plugin 'vim-airline/vim-airline'
@@ -32,6 +32,8 @@ Plugin 'L9'
 Plugin 'wincent/command-t'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-sensible'
+Plugin 'jremmen/vim-ripgrep'
+Plugin 'mileszs/ack.vim'
 
 " Spark Line
 Plugin 'rstacruz/sparkup',{'rtp':'vim/'}
@@ -41,6 +43,7 @@ Plugin 'flazz/vim-colorschemes'
 
 " Auto complete
 Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-sleuth'
 
 " EditorConfig
 Plugin 'editorconfig/editorconfig-vim'
@@ -72,9 +75,6 @@ endif
 " Tab Stuffs
 set smarttab
 set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
 set autoindent
 set smartindent
 
@@ -103,3 +103,4 @@ nmap md :InstantMarkdownPreview<CR>
 
 " Markdown
 let g:instant_markdown_autostart = 0
+

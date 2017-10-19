@@ -43,6 +43,8 @@ modules="
     editorconfig
     mas
     rg
+    ag
+    vim
 "
 for module in $modules; do
     brew install "$module"
