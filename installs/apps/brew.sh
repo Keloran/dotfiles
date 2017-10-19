@@ -45,6 +45,7 @@ modules="
     rg
     ag
     vim
+    yarn
 "
 for module in $modules; do
     brew install "$module"
