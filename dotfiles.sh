@@ -67,6 +67,9 @@ sub_apps () {
     sh -c $DOTFILES_DIR/installs/apps/brew.sh
     echo "Brew Installed"
 
+    sh -c $DOTFILES_DIR/installs/apps/python.sh
+    echo "Python Installed"
+
     sh -c $DOTFILES_DIR/installs/apps/mas.sh
     echo "MAS Installed"
 }

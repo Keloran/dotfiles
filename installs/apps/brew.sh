@@ -42,6 +42,7 @@ modules="
     z
     editorconfig
     mas
+    rg
 "
 for module in $modules; do
     brew install "$module"
@@ -67,15 +68,14 @@ modules="
     gpgtools
     hipchat
     intellij-idea
-    istat-menus
     iterm2
     moom
-    paw
     shuttle
     slack
     hyper
     discord
     rider
+    setapp
 "
 for module in $modules; do
     brew cask install "$module"
@@ -95,9 +95,6 @@ done
 # Cleanup
 brew cask cleanup
 brew cleanup
-
-# Python
-pip2 install --upgrade pip setuptools
 
 # Kryptonite
 brew install kryptco/tap/kr
