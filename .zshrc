@@ -57,6 +57,7 @@ plugins=(git osx sudo common-aliases)
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/opt/go/libexec/bin:/usr/local/opt/python/libexec/bin:$PATH"
 export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
+export JAVA_HOME=$(/usr/libexec/java_home -v 9)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
