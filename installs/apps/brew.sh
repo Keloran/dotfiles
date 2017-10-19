@@ -79,6 +79,7 @@ modules="
     discord
     rider
     setapp
+    java
 "
 for module in $modules; do
     brew cask install "$module"
