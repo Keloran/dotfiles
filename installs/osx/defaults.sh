@@ -77,7 +77,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
 # Dark Mode
-if [[ -f "$HOME/Library/Preferenes/.GlobalPreferences" ]]; then
+if [[ -f "$HOME/Library/Preferences/.GlobalPreferences" ]]; then
     defaults write $HOME/Library/Preferences/.GlobalPrefences AppleInterfaceTheme Dark
     killall Dock
     killall SystemUIServer
