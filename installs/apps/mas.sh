@@ -21,3 +21,5 @@ mas install 924726344
 # Patterns
 mas install 429449079
 
+# Unarchiver
+mas install 425424353
