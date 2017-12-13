@@ -51,17 +51,6 @@ chflags nohidden ~/Library
 
 killall Finder > /dev/null 2>&1
 
-# Safari
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-defaults write com.apple.Safari HomePage -string "about:blank"
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-defaults write com.apple.Safari WebKitDeveloperExtras -bool true
-
-killall Safari > /dev/null 2>&1
-
 # Mission Control
 defaults write com.apple.dashboard mxc-disabled -bool true
 defaults write com.apple.dock dashboard-in-overlay -bool true
@@ -69,6 +58,18 @@ defaults write com.apple.dock mru-spaces -bool false
 
 # Session
 defaults write $HOME/Library/Preferences/.GlobalPreferences NSQuitAlwaysKeepWindows -bool true
+
+# Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Disk Utility
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+defaults write com.apple.DiskUtility advanced-image-options -bool true
+
+# App Store
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.commerce AutoUpdate -bool true
 
 # Spotlight
 defaults write com.apple.spotlight orderedItems -array \

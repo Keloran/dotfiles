@@ -42,6 +42,7 @@ sub_osx() {
     sh -c $DOTFILES_DIR/installs/osx/ssh.sh
     sh -c $DOTFILES_DIR/installs/osx/dns.sh
     sh -c $DOTFILES_DIR/installs/osx/launchpad.sh
+    sh -c $DOTFILES_DIR/installs/osx/safari.sh
     echo "Installed OSX Stuff"
     echo "Done. Some changes may require a logout/restart to take effect."
 }
