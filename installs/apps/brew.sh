@@ -80,6 +80,9 @@ modules="
     rider
     setapp
     java
+    min
+    hyper
+    jetbrains-toolbox
 "
 for module in $modules; do
     brew cask install "$module"
