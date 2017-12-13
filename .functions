@@ -56,6 +56,10 @@ dockerStop()
         yes | docker-compose rm
         dockerPsClean
     else
+        dockerpath="${PWD##*/}"
+        dockerpath=${dockerpath,,}
+        echo $dockerpath
+
         docker stop "${PWD##*/}"_build
         docker rmi "${PWD##*/}"_build
         dockerPsClean
@@ -91,3 +95,18 @@ dockerLogs()
     fi
 }
 
+updateSys()
+{
+    upgrade_oh_my_zsh
+    brew update
+    brew upgrade
+    brew cask outdated
+    mas outdated
+    brew cleanup
+}
+
+cleanOpenWith()
+{
+    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+    killall Finder
+}

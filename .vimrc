@@ -68,11 +68,6 @@ let g:airline_theme = 'molokai'
 let g:airline_powerline_fonts = 1
 colorscheme molokai
 
-" VIM Stuffs
-if has("autocmd")
-    autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-
 " Tab Stuffs
 set smarttab
 set expandtab
@@ -82,13 +77,13 @@ set smartindent
 " Paste
 set paste
 
-syntax on
-
 " Mouse Scrolling
 set mouse=a
 
 " Language specific stuffs
 if has("autocmd")
+    filetype on
+	autocmd bufwritepost .vimrc source $MYVIMRC
     autocmd BufRead,BufNewFile *.podspec,Podfile set filetype=ruby
     autocmd BufRead,BufNewFile *.json set autoindent filetype=javascript
     autocmd BufRead,BufNewFile *.md set filetype=markdown

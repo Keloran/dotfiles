@@ -44,7 +44,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: '3px 5px 4px 8px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -98,13 +98,27 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
+  hyperlinks: {
+      defaultBrowser: true
+  },
+
+  hyperTabs: {
+    tabIcons: false,
+    tabIconsColored: true
+  },
+
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
   // examples:
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [],
+  plugins: [
+      'hyperlinks',
+      'hyper-tabs-enhanced',
+      'hyper-history',
+      'hyperterm-monokai'
+  ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

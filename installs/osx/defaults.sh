@@ -1,7 +1,24 @@
 #!/usr/bin/env bash
 
+# Kill System Prefences
+osascript -e 'tell application "System Preferences" to quit'
+
+# Preset SUDO
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Startup Sound
+sudo nvram SystemAudioVolume=" "
+
+# Click Clock in Login for s&g
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+# Expand Save Panel
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
 # Network
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontwriteUSBStores -bool true
 
 # Mouse
 defaults -currentHost write com.apple.mouse.tapBehavior -int 1
@@ -28,6 +45,9 @@ defaults write com.apple.finder ShowPathBar -bool true
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+chflags nohidden ~/Library
 
 killall Finder > /dev/null 2>&1
 
@@ -48,9 +68,7 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Session
-if [[ -f "$HOME/Library/Preferences/.GlobalPreferences" ]]; then
-    defaults write $HHOME/Library/Preferences/.GlobalPreferences NSQuitAlwaysKeepWindows -bool true
-fi
+defaults write $HOME/Library/Preferences/.GlobalPreferences NSQuitAlwaysKeepWindows -bool true
 
 # Spotlight
 defaults write com.apple.spotlight orderedItems -array \
@@ -77,9 +95,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
 # Dark Mode
-if [[ -f "$HOME/Library/Preferenes/.GlobalPreferences" ]]; then
-    defaults write $HOME/Library/Preferences/.GlobalPrefences AppleInterfaceTheme Dark
-    killall Dock
-    killall SystemUIServer
-fi
+defaults write $HOME/Library/Preferences/.GlobalPrefences AppleInterfaceTheme Dark
+killall Dock
+killall SystemUIServer
 
