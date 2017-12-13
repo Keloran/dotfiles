@@ -27,6 +27,7 @@
     branch = auto
     diff = auto
     status = auto
+    ui = auto
 [push]
     default = upstream
 [commit]

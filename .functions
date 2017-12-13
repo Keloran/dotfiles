@@ -110,3 +110,8 @@ cleanOpenWith()
     /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
     killall Finder
 }
+
+digga()
+{
+    dig +nocmd "$1" ANY +multiline +noall +answer
+}
