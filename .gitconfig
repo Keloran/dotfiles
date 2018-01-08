@@ -21,6 +21,12 @@
     pushit = !"git push -u origin $(git rev-parse --abbrev-ref HEAD)"
     ticket = !"git checkout -b $2"
     master = !"git checkout master && git pull"
+    finish = "!f() { \
+        currentBranch=$(git rev-parse --abbrev-ref HEAD); \
+        git checkout master; \
+        git merge $currentBranch; \
+        git branch -d $currentBranch; \
+    }; f"
 [credential]
     helper = osxkeychain
 [color]
@@ -31,12 +37,12 @@
 [push]
     default = upstream
 [commit]
-    gpgSign = true
+	gpgSign = true
 [filter "lfs"]
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
     required = true
 [gpg]
-    program = /usr/local/bin/krgpg
+	program = /usr/local/bin/krgpg
 [tag]
-    forceSignAnnotated = true
+	forceSignAnnotated = true
