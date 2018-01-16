@@ -86,7 +86,7 @@ module.exports = {
     bell: 'SOUND',
 
     // if true, selected text will automatically be copied to the clipboard
-    copyOnSelect: false
+    copyOnSelect: true
 
     // if true, on right click selected text will be copied or pasted if no
     // selection is present (true by default on Windows)
@@ -104,7 +104,8 @@ module.exports = {
 
   hyperTabs: {
     tabIcons: false,
-    tabIconsColored: true
+    tabIconsColored: true,
+    closeAlign: 'right'
   },
 
   // a list of plugins to fetch and install from npm
@@ -114,10 +115,13 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-      'hyperlinks',
-      'hyper-tabs-enhanced',
-      'hyper-history',
-      'hyperterm-monokai'
+      'hyperlinks'
+      ,'hyper-tabs-enhanced'
+      ,'hyper-history'
+      ,'hyper-seti-monokai'
+      ,'hyperline#0.6.1'
+      ,'hyper-broadcast'
+      ,'hyper-hide-title'
   ],
 
   // in development, you can create a directory under
