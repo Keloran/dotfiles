@@ -4,5 +4,5 @@ sudo curl -o /Library/LaunchDaemons/com.ralphschindler.docker_10254_alias.plist 
 echo "address=/.dev/10.254.254.254" >> $(brew --prefix)/etc/dnsmasq.conf
 echo "listen-address=127.0.0.1" >> $(brew --prefix)/etc/dnsmasq.conf
 
-sudo brew services dnsmasq start
+brew services start dnsmasq
 sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'
