@@ -19,33 +19,120 @@ brew upgrade
 
 # Default Brews
 modules="
+    adns
+    asciidoc
+    asio
+    augeas
     awscli
+    bash
+    bit
     carthage
     cmake
+    dnsmasq
+    docbook
     docker-clean
+    dockutil
+    editorconfig
+    engine_pkcs11
+    fac
+    freetype
+    gdbm
+    fglags
+    git
     git-extras
+    git-sizer
+    glew
+    glog
+    gmp
+    gnupg
+    go
+    gource
     gpg-agent
-    gnupg2
-    htop-osx
+    gradle
+    htop
+    icu4c
+    jemalloc
+    jpeg
+    kr
+    kubernetes-cli
+    libarchive
+    libassuan
+    libevent
+    libffi
+    libgcrypt
+    libgpg-error
+    libidn2
+    libksba
+    libmagic
+    libp11
+    libpng
+    librdkafka
+    libsass
+    libssh2
+    libtasn1
+    libtiff
+    libtool
+    libunistring
+    libusb
+    libxml2
+    libyaml
+    lldpd
+    logstalgia
+    lz4
+    lzlib
+    mas
     multitail
+    nethacked
+    nettle
     nmap
     node
-    ssh-copy-id
-    tree
-    watch
-    wget
+    npth
+    nmv
+    openal-soft
+    openssl
+    openssl@1.1
+    osquery
+    p11-kut
+    pcre
+    perl
+    pinetry
+    pkgconfig
+    pth
     python
-    dnsmasq
-    cask
-    zplug
+    python3
+    rapidjson
+    readline
+    ripgrep
+    rocksdb
+    ruby
+    ruby@2.0
+    rust
+    s3cmd
+    sassc
+    sdl2
+    sdl2_image
+    siege
+    sluethkit
+    snappy
+    sqlite
+    ssh-copy-id
+    telnet
+    the_silver_searcher
+    thrift
     tmux
-    z
-    editorconfig
-    mas
-    rg
-    ag
+    tree
+    vegeta
     vim
+    watch
+    webp
+    wget
+    wtf
+    xz
+    yara
     yarn
+    z
+    zplug
+    zstd
 "
 for module in $modules; do
     brew install "$module"
@@ -59,30 +146,38 @@ brew install openal-soft --universal
 modules="
     aerial
     alfred
+    astro
     atom
     bartender
     bettertouchtool
     clion
     cocoapods
+    datagrip
+    discord
     disk-inventory-x
     docker
     dropbox
+    faviconographer
     gas-mask
+    google-chrome
     gpgtools
     hipchat
+    hyper
     intellij-idea
     iterm2
+    java
+    java8
+    jetbrains-toolbox
+    kaliedoscope
+    min
     moom
-    shuttle
-    slack
-    hyper
-    discord
     rider
     setapp
-    java
-    min
-    hyper
-    jetbrains-toolbox
+    shuttle
+    skype
+    slack
+    virtualbox
+    visual-studio-pro
 "
 for module in $modules; do
     brew cask install "$module"
