@@ -91,9 +91,20 @@ done
 # Fonts
 modules="
     font-consolas-for-powerline
-    font-menlo-for-powerline
-    font-source-code-pro-for-powerline
     font-hack-nerd-font
+    font-anonymouspro-nerd-font
+    font-firacode-nerd-font
+    font-meslo-nerd-font
+    font-mononoki-nerd-font
+    font-roboto-nerd-font
+    font-sourcecodepro-nerd-font
+    font-terminus-nerd-font
+    font-ubuntu-nerd-font
+    font-monofur-nerd-font
+    font-monoid-nerd-font
+    font-profont-nerd-font
+    font-spacemono-nerd-font
+    font-dejavusansmono-nerd-font
 "
 for module in $modules; do
     brew cask install "$module"
