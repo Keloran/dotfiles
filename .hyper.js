@@ -4,11 +4,30 @@
 
 module.exports = {
   config: {
+    hyperline: {
+      plugins: [
+        'ip',
+        'hostname',
+        'Docker',
+        'network',
+        'memory',
+        'cpu',
+        'Time'
+      ]
+    },
+    hyperTabs: {
+      tabIcons: false,
+      tabIconsColored: true
+    },
+    hyperlinks: {
+      defaultBrowser: true
+    },
+
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 10,
 
     // font family with optional fallbacks
-    fontFamily: '"Knack Nerd Font", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"Monoid Nerd Font", "MesloLGM Nerd Font", "DejaVuSansMono Nerd Font", "TerminusTTF Nerd Font", "SauceCodePro Nerd Font"',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -98,16 +117,6 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
-  hyperlinks: {
-      defaultBrowser: true
-  },
-
-  hyperTabs: {
-    tabIcons: false,
-    tabIconsColored: true,
-    closeAlign: 'right'
-  },
-
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
   // examples:
@@ -115,11 +124,11 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-      'hyperlinks'
+      'hyperline'
+      ,'hyperlinks'
       ,'hyper-tabs-enhanced'
       ,'hyper-history'
       ,'hyper-seti-monokai'
-      ,'hyperline#0.6.1'
       ,'hyper-broadcast'
       ,'hyper-hide-title'
   ],
@@ -127,5 +136,7 @@ module.exports = {
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: []
+  localPlugins: [
+//    'hyperline'
+  ]
 };
