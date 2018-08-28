@@ -1,7 +1,24 @@
 #!/usr/bin/env bash
 
+# Kill System Prefences
+osascript -e 'tell application "System Preferences" to quit'
+
+# Preset SUDO
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Startup Sound
+sudo nvram SystemAudioVolume=" "
+
+# Click Clock in Login for s&g
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+# Expand Save Panel
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
 # Network
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontwriteUSBStores -bool true
 
 # Mouse
 defaults -currentHost write com.apple.mouse.tapBehavior -int 1
@@ -28,19 +45,11 @@ defaults write com.apple.finder ShowPathBar -bool true
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+chflags nohidden ~/Library
 
 killall Finder > /dev/null 2>&1
-
-# Safari
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-defaults write com.apple.Safari HomePage -string "about:blank"
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-defaults write com.apple.Safari WebKitDeveloperExtras -bool true
-
-killall Safari > /dev/null 2>&1
 
 # Mission Control
 defaults write com.apple.dashboard mxc-disabled -bool true
@@ -49,6 +58,18 @@ defaults write com.apple.dock mru-spaces -bool false
 
 # Session
 defaults write $HOME/Library/Preferences/.GlobalPreferences NSQuitAlwaysKeepWindows -bool true
+
+# Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Disk Utility
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+defaults write com.apple.DiskUtility advanced-image-options -bool true
+
+# App Store
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.commerce AutoUpdate -bool true
 
 # Spotlight
 defaults write com.apple.spotlight orderedItems -array \

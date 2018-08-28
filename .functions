@@ -35,6 +35,17 @@ dockerUI()
   docker run -dp 9001:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock uifd/ui-for-docker
 }
 
+dockerBench()
+{
+  docker run -it --net host --pid host --userns host --cap-add audit_control \
+    -e DOCKER_CONTENT_TRUST=$DOCKER_CONTENT_TRUST \
+    -v /var/lib:/var/lib \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /Users/maxhooton/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux:/usr/lib/systemd \
+    -v /etc:/etc --label docker_bench_security \
+    docker/docker-bench-security
+}
+
 dockerStart()
 {
     dockerStop
@@ -95,6 +106,34 @@ dockerLogs()
     fi
 }
 
+dockerAWS()
+{
+  repoName=$1
+  accountNumber=$2
+  location=$3
+
+  AWSCred=$(aws ecr get-login --no-include-email --region $3)
+  docker build -t $1 .
+  docker tag $1:latest $2.dkr.$3.amazonaws.com/$1:latest
+  docker push $2.dkr.ecr.$3/$1:latest
+}
+
+dockerRestart()
+{
+    if [[ -e $(pwd)/docker-compose.yml ]]; then
+        if [[ -z $1 ]]; then
+            dockerStop
+            dockerStart
+        else
+            docker-compose stop $1
+            docker-compose up -d $1
+        fi
+    else
+        dockerStop
+        dockerStart
+    fi
+}
+
 updateSys()
 {
     upgrade_oh_my_zsh
@@ -102,4 +141,17 @@ updateSys()
     brew upgrade
     brew cask outdated
     mas outdated
+    brew cleanup
 }
+
+cleanOpenWith()
+{
+    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+    killall Finder
+}
+
+digga()
+{
+    dig +nocmd "$1" ANY +multiline +noall +answer
+}
+
