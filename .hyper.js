@@ -4,11 +4,30 @@
 
 module.exports = {
   config: {
+    hyperline: {
+      plugins: [
+        'ip',
+        'hostname',
+        'Docker',
+        'network',
+        'memory',
+        'cpu',
+        'Time'
+      ]
+    },
+    hyperTabs: {
+      tabIcons: false,
+      tabIconsColored: true
+    },
+    hyperlinks: {
+      defaultBrowser: true
+    },
+
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 11,
 
     // font family with optional fallbacks
-    fontFamily: '"Knack Nerd Font", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"Monoid Nerd Font", "MesloLGM Nerd Font", "DejaVuSansMono Nerd Font", "TerminessTTF Nerd Font", "SauceCodePro Nerd Font"',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -32,7 +51,7 @@ module.exports = {
     css: '',
 
     // custom css to embed in the terminal window
-    termCSS: '',
+    termCSS: 'x-row {line-height: initial} .unicode-node {position: relative}',
 
     // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
@@ -86,7 +105,7 @@ module.exports = {
     bell: 'SOUND',
 
     // if true, selected text will automatically be copied to the clipboard
-    copyOnSelect: false
+    copyOnSelect: true
 
     // if true, on right click selected text will be copied or pasted if no
     // selection is present (true by default on Windows)
@@ -98,15 +117,6 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
-  hyperlinks: {
-      defaultBrowser: true
-  },
-
-  hyperTabs: {
-    tabIcons: false,
-    tabIconsColored: true
-  },
-
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
   // examples:
@@ -114,14 +124,20 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-      'hyperlinks',
-      'hyper-tabs-enhanced',
-      'hyper-history',
-      'hyperterm-monokai'
+    'hyperline',
+    'hyperlinks',
+    'hyper-tabs-enhanced',
+    'hyper-history',
+    'hyper-seti-monokai',
+    'hyper-broadcast',
+    'hyper-hide-title',
+    "hypercwd"
   ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: []
+  localPlugins: [
+//    'hyperline'
+  ]
 };

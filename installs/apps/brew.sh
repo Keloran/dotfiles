@@ -19,14 +19,59 @@ brew upgrade
 
 # Default Brews
 modules="
+    adns
+    afflib
+    asciidoc
+    asio
+    augeas
     awscli
+    azure-cli
+    bash
+    bdw-gc
+    bit
+    boost
+    c-ares
     carthage
     cmake
+    conan
+    coreutils
+    crystal
+    crystal-lang
+    ctags
+    dep
+    dnsmasq
+    docbook
     docker-clean
+    dockutil
+    editorconfig
+    emacs
+    engine_pkcs11
+    fac
+    freetype
+    gdbm
+    gettext
+    gflags
+    git
     git-extras
+    git-sizer
+    glew
+    glib
+    glog
+    gmp
+    gnupgg
+    gnutls
+    go
+    gource
     gpg-agent
-    gnupg2
-    htop-osx
+    gradle
+    htop
+    icu4c
+    jemalloc
+    jpeg
+    jq
+    jsoncpp
+    kr
+    kubernetes-cli
     multitail
     nmap
     node
