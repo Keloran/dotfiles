@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Install Brew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [ ! -f /usr/local/bin/brew ]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 # Taps
 modules="
