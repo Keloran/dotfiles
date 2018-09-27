@@ -128,6 +128,7 @@ modules="
     python
     python3
     python@2
+    ranger
     rapidjson
     readline
     ripgrep
@@ -195,7 +196,6 @@ modules="
     dotnet
     dotnet-sdk
     dropbox
-    faviconographer
     gas-mask
     goland
     google-chrome
