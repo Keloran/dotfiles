@@ -54,8 +54,9 @@ dockerStart()
         docker-compose up -d
         docker-compose ps
     else
-        docker build -t "${PWD##*/}" .
-        docker run -P --rm -d -it --name "${PWD##*/}"_build "${PWD##*/}"
+    	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+        docker build -t "$dockerpath" .
+        docker run -P --rm -d -it --name "$dockerpath"_build "$dockerpath"
         docker ps -a
     fi
 }
@@ -67,12 +68,10 @@ dockerStop()
         yes | docker-compose rm
         dockerPsClean
     else
-        dockerpath="${PWD##*/}"
-        dockerpath=${dockerpath,,}
-        echo $dockerpath
+    	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
 
-        docker stop "${PWD##*/}"_build
-        docker rmi "${PWD##*/}"_build
+        docker stop "$dockerpath"_build
+        docker rmi "$dockerpath"_build
         dockerPsClean
     fi
 
