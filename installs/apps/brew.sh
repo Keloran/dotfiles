@@ -35,6 +35,7 @@ modules="
     c-ares
     carthage
     cmake
+    colordiff
     conan
     coreutils
     crystal
@@ -195,7 +196,6 @@ modules="
     discord
     disk-inventory-x
     docker
-    dotnet
     dotnet-sdk
     dropbox
     gas-mask

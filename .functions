@@ -54,7 +54,7 @@ dockerStart()
         docker-compose up -d
         docker-compose ps
     else
-    	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+        dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
         docker build -t "$dockerpath" .
         docker run -P --rm -d -it --name "$dockerpath"_build "$dockerpath"
         docker ps -a
@@ -68,7 +68,7 @@ dockerStop()
         yes | docker-compose rm
         dockerPsClean
     else
-    	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+        dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
 
         docker stop "$dockerpath"_build
         docker rmi "$dockerpath"_build
@@ -85,10 +85,19 @@ dockerExec()
             echo "You need to give me a server"
             docker-compose ps
         else
-            docker-compose exec $1 bash
+	    if [[ -z "$2" ]]; then
+	        docker-compose exec $1 bash
+	    else
+	    	docker-compose exec $1 $2
+	    fi
         fi
     else
-        docker exec "${PWD##/}"_build bash
+    	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+	if [[ -z "$1" ]]; then
+            docker exec "$dockerpath"_build bash
+	else
+	    docker exec "$dockerpath"_build $1
+	fi
     fi
 }
 
@@ -101,7 +110,8 @@ dockerLogs()
             docker-compose logs -f $1
         fi
     else
-        docker logs -f
+	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+        docker logs -f "$dockerpath"_build
     fi
 }
 
@@ -154,3 +164,7 @@ digga()
     dig +nocmd "$1" ANY +multiline +noall +answer
 }
 
+cdiff()
+{
+	colordiff -u "$@"
+}
