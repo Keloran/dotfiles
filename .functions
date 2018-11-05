@@ -49,15 +49,19 @@ dockerBench()
 dockerStart()
 {
     dockerStop
-    if [[ -e $(pwd)/docker-compose.yml ]]; then
-        docker-compose build
-        docker-compose up -d
-        docker-compose ps
+    if [[ -e $(pwd)/docker.sh ]]; then
+    	sh $(pwd)/docker.sh
     else
-        dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
-        docker build -t "$dockerpath" .
-        docker run -P --rm -d -it --name "$dockerpath"_build "$dockerpath"
-        docker ps -a
+        if [[ -e $(pwd)/docker-compose.yml ]]; then
+            docker-compose build
+	    docker-compose up -d
+            docker-compose ps
+    	else
+            dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+            docker build -t "$dockerpath" .
+            docker run -P --rm -d -it --name "$dockerpath"_build "$dockerpath"
+            docker ps -a
+	fi
     fi
 }
 
