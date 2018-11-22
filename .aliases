@@ -8,4 +8,4 @@ alias docker-logs="docker-compose logs -f"
 alias docker-restart="docker-stop && docker-start"
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias filemerge="open -a FileMerge"
-
+alias dpsa="docker ps -a"
