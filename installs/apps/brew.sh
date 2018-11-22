@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Install Brew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [ ! -f /usr/local/bin/brew ]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 # Taps
 modules="
@@ -20,31 +22,47 @@ brew upgrade
 # Default Brews
 modules="
     adns
+    afflib
     asciidoc
     asio
     augeas
     awscli
+    azure-cli
     bash
+    bdw-gc
     bit
+    boost
+    c-ares
     carthage
     cmake
+    colordiff
+    conan
+    coreutils
+    crystal
+    crystal-lang
+    ctags
+    dep
     dnsmasq
     docbook
     docker-clean
     dockutil
     editorconfig
+    emacs
     engine_pkcs11
     fac
     freetype
     gdbm
-    fglags
+    gettext
+    gflags
     git
     git-extras
     git-sizer
     glew
+    glib
     glog
     gmp
-    gnupg
+    gnupgg
+    gnutls
     go
     gource
     gpg-agent
@@ -53,19 +71,25 @@ modules="
     icu4c
     jemalloc
     jpeg
+    jq
+    jsoncpp
     kr
     kubernetes-cli
+    lastpass-cli
     libarchive
     libassuan
     libevent
+    libewf
     libffi
     libgcrypt
     libgpg-error
     libidn2
     libksba
     libmagic
+    libmaxminddb
     libp11
     libpng
+    libpq
     librdkafka
     libsass
     libssh2
@@ -75,9 +99,14 @@ modules="
     libunistring
     libusb
     libxml2
-    libyaml
-    lldpd
+    libpd
+    llvm
+    llvm@5
     logstalgia
+    lua
+    lua@5.1
+    luajit
+    luarocks
     lz4
     lzlib
     mas
@@ -88,6 +117,7 @@ modules="
     node
     npth
     nmv
+    oniguruma
     openal-soft
     openssl
     openssl@1.1
@@ -100,6 +130,8 @@ modules="
     pth
     python
     python3
+    python@2
+    ranger
     rapidjson
     readline
     ripgrep
@@ -115,17 +147,21 @@ modules="
     sluethkit
     snappy
     sqlite
+    ssdeep
     ssh-copy-id
     telnet
     the_silver_searcher
     thrift
+    tig
     tmux
     tree
+    typescript
     vegeta
     vim
     watch
     webp
     wget
+    wireshark
     wtf
     xz
     yara
@@ -144,7 +180,11 @@ brew install openal-soft --universal
 
 # Brew Casks
 modules="
+    1password
+    1password-cli
+    actual-odbc-pack
     aerial
+    agenda
     alfred
     astro
     atom
@@ -156,9 +196,10 @@ modules="
     discord
     disk-inventory-x
     docker
+    dotnet-sdk
     dropbox
-    faviconographer
     gas-mask
+    goland
     google-chrome
     gpgtools
     hipchat
@@ -171,13 +212,16 @@ modules="
     kaliedoscope
     min
     moom
+    powershell
     rider
+    robo-3t
     setapp
     shuttle
     skype
     slack
+    station
     virtualbox
-    visual-studio-pro
+    visual-studio-code
 "
 for module in $modules; do
     brew cask install "$module"

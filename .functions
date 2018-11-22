@@ -49,14 +49,19 @@ dockerBench()
 dockerStart()
 {
     dockerStop
-    if [[ -e $(pwd)/docker-compose.yml ]]; then
-        docker-compose build
-        docker-compose up -d
-        docker-compose ps
+    if [[ -e $(pwd)/docker.sh ]]; then
+    	sh $(pwd)/docker.sh
     else
-        docker build -t "${PWD##*/}" .
-        docker run -P --rm -d -it --name "${PWD##*/}"_build "${PWD##*/}"
-        docker ps -a
+        if [[ -e $(pwd)/docker-compose.yml ]]; then
+            docker-compose build
+	    docker-compose up -d
+            docker-compose ps
+    	else
+            dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+            docker build -t "$dockerpath" .
+            docker run -P --rm -d -it --name "$dockerpath"_build "$dockerpath"
+            docker ps -a
+	fi
     fi
 }
 
@@ -67,12 +72,10 @@ dockerStop()
         yes | docker-compose rm
         dockerPsClean
     else
-        dockerpath="${PWD##*/}"
-        dockerpath=${dockerpath,,}
-        echo $dockerpath
+        dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
 
-        docker stop "${PWD##*/}"_build
-        docker rmi "${PWD##*/}"_build
+        docker stop "$dockerpath"_build
+        docker rmi "$dockerpath"_build
         dockerPsClean
     fi
 
@@ -86,10 +89,19 @@ dockerExec()
             echo "You need to give me a server"
             docker-compose ps
         else
-            docker-compose exec $1 bash
+	    if [[ -z "$2" ]]; then
+	        docker-compose exec $1 bash
+	    else
+	    	docker-compose exec $1 $2
+	    fi
         fi
     else
-        docker exec "${PWD##/}"_build bash
+    	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+	if [[ -z "$1" ]]; then
+            docker exec "$dockerpath"_build bash
+	else
+	    docker exec "$dockerpath"_build $1
+	fi
     fi
 }
 
@@ -102,7 +114,8 @@ dockerLogs()
             docker-compose logs -f $1
         fi
     else
-        docker logs -f
+	dockerpath=$(basename ${PWD##*/} | tr 'A-Z' 'a-z')
+        docker logs -f "$dockerpath"_build
     fi
 }
 
@@ -155,3 +168,7 @@ digga()
     dig +nocmd "$1" ANY +multiline +noall +answer
 }
 
+cdiff()
+{
+	colordiff -u "$@"
+}

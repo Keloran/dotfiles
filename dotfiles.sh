@@ -87,6 +87,7 @@ sub_dots() {
     cp $DOTFILES_DIR/.multitailrc $HOME/.multitailrc
     cp $DOTFILES_DIR/.shuttle.json $HOME/.shuttle.json
     cp $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
+    cp $DOTFILES_DIR/.colordiffrc $HOME/.colordiffrc
 
     echo "Dots Installed"
 }

@@ -24,10 +24,10 @@ module.exports = {
     },
 
     // default font size in pixels for all tabs
-    fontSize: 10,
+    fontSize: 11,
 
     // font family with optional fallbacks
-    fontFamily: '"Monoid Nerd Font", "MesloLGM Nerd Font", "DejaVuSansMono Nerd Font", "TerminusTTF Nerd Font", "SauceCodePro Nerd Font"',
+    fontFamily: '"Monoid Nerd Font", "MesloLGM Nerd Font", "DejaVuSansMono Nerd Font", "TerminessTTF Nerd Font", "SauceCodePro Nerd Font"',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -51,7 +51,7 @@ module.exports = {
     css: '',
 
     // custom css to embed in the terminal window
-    termCSS: '',
+    termCSS: 'x-row {line-height: initial} .unicode-node {position: relative}',
 
     // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
@@ -124,13 +124,14 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-      'hyperline'
-      ,'hyperlinks'
-      ,'hyper-tabs-enhanced'
-      ,'hyper-history'
-      ,'hyper-seti-monokai'
-      ,'hyper-broadcast'
-      ,'hyper-hide-title'
+    'hyperline',
+    'hyperlinks',
+    'hyper-tabs-enhanced',
+    'hyper-history',
+    'hyper-seti-monokai',
+    'hyper-broadcast',
+    'hyper-hide-title',
+    "hypercwd"
   ],
 
   // in development, you can create a directory under

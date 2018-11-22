@@ -1,57 +1,57 @@
 [user]
-    name = Keloran
-    email = keloran@bugfix.es
-    image = "https://avatars1.githubusercontent.com/u/200350?v=3&s=460"
+  name = Keloran
+  email = keloran@bugfix.es
+  image = "https://avatars1.githubusercontent.com/u/200350?v=3&s=460"
 [push]
-    default = simple
+  default = simple
 [core]
-    editor = /usr/bin/vim
-    excludesfile = ~/.gitignore_global
+  editor = /usr/bin/vim
+  excludesfile = ~/.gitignore_global
 [github]
-    user = keloran
+  user = keloran
 [alias]
-    a = add --all
-    b = branch
-    c = commit
-    co = checkout
-    rh = reset --hard
-    s = status -sb
-    am = add --all -m
-    logs = !"git log --oneline --decorate --all --graph --stat"
-    standup = !"git log --reverse --branches --since=$(if [[ "Mon" == "$(date +%a)" ]]; then echo "last friday"; else echo "yesterday"; fi) --author=$(git config --get user.email) --format=format:'%C(cyan) %ad %C(yellow)%h %Creset %s %Cgreen%d' --date=local"
-    pushit = !"git push -u origin $(git rev-parse --abbrev-ref HEAD)"
-    ticket = !"git checkout -b $2"
-    master = !"git checkout master && git pull"
-    finish = "!f() { \
+  a = add --all
+  b = branch
+  c = commit
+  co = checkout
+  rh = reset --hard
+  s = status -sb
+  am = add --all -m
+  logs = !"git log --oneline --decorate --all --graph --stat"
+  standup = !"git log --reverse --branches --since=$(if [[ "Mon" == "$(date +%a)" ]]; then echo "last friday"; else echo "yesterday"; fi) --author=$(git config --get user.email) --format=format:'%C(cyan) %ad %C(yellow)%h %Creset %s %Cgreen%d' --date=local"
+  pushit = !"git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+  ticket = !"git checkout -b $2"
+  master = !"git checkout master && git pull"
+  finish = "!f() { \
       currentBranch=$(git rev-parse --abbrev-ref HEAD); \
       git checkout master; \
       git merge $currentBranch; \
       git branch -d $currentBranch; \
     }; f"
-    opensource = "!f() { \
+  opensource = "!f() { \
       git fetch upstream; \
       git merge upstream/master; \
+      git rebase; \
       git push; \
     }; f"
 [credential]
-    helper = osxkeychain
+  helper = osxkeychain
 [color]
-    branch = auto
-    diff = auto
-    status = auto
-    ui = auto
+  branch = auto
+  diff = auto
+  status = auto
 [push]
-    default = upstream
+  default = upstream
 [commit]
-	gpgSign = true
+  gpgSign = true
 [filter "lfs"]
-    clean = git-lfs clean %f
-    smudge = git-lfs smudge %f
-    required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
 [gpg]
-	program = /usr/local/bin/krgpg
+  program = /usr/local/bin/krgpg
 [tag]
-	forceSignAnnotated = true
+  forceSignAnnotated = true
 [diff]
   tool = opendiff
 [difftool]
@@ -59,7 +59,11 @@
 [difftool "opendiff"]
   cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustexitcode = true
+[pager]
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,4 -RFX
+
