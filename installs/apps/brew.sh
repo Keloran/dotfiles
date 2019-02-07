@@ -201,7 +201,7 @@ modules="
     gas-mask
     goland
     google-chrome
-    gpgtools
+    gpg-suite
     hipchat
     hyper
     intellij-idea
