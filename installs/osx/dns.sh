@@ -3,6 +3,7 @@
 
 echo "alias=10.254.254.254,127.0.0.1" >> $(brew --prefix)/etc/dnsmasq.conf
 echo "address=/.devel/10.254.254.254" >> $(brew --prefix)/etc/dnsmasq.conf
+echo "address=/.local/10.254.254.254" >> $(brew --prefix)/etc/dnsmasq.conf
 echo "listen-address=127.0.0.1" >> $(brew --prefix)/etc/dnsmasq.conf
 
 brew services start dnsmasq
