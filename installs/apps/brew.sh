@@ -144,7 +144,7 @@ modules="
     sdl2
     sdl2_image
     siege
-    sluethkit
+    sleuthkit
     snappy
     sqlite
     ssdeep
@@ -250,7 +250,6 @@ for module in $modules; do
 done
 
 # Cleanup
-brew cask cleanup
 brew cleanup
 
 # Kryptonite
