@@ -7,7 +7,6 @@ fi
 
 # Taps
 modules="
-    homebrew/homebrew-games
     homebrew/homebrew-dupes
     caskroom/fonts
 "
