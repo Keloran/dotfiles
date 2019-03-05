@@ -7,7 +7,6 @@ fi
 
 # Taps
 modules="
-    homebrew/homebrew-dupes
     caskroom/fonts
 "
 for module in $modules; do

@@ -4,6 +4,10 @@ BIN_NAME=$(basename "$0")
 COMMAND_NAME=$1
 SUB_COMMAND_NAME=$2
 
+if [[ $DOTFILES_DIR == '' ]]; then
+    DOTFILES_DIR=$(pwd)
+fi
+
 sub_help () {
 cat << EOF
     Usage: $BIN_NAME <command>
