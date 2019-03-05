@@ -123,7 +123,7 @@ modules="
     p11-kut
     pcre
     perl
-    pinetry
+    pinentry
     pkgconfig
     pth
     python
