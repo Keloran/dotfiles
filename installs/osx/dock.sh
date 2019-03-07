@@ -11,7 +11,7 @@ dockutil --no-restart --remove all
 dockutil --no-restart --add "/Applications/Safari.app"
 
 if [[ -d "/Applications/Min.app" ]]; then
-    dockutil --no-restart -add "/Applications/Min.app"
+    dockutil --no-restart --add "/Applications/Min.app"
 fi
 
 
