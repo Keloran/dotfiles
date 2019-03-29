@@ -188,9 +188,7 @@ modules="
     atom
     bartender
     bettertouchtool
-    clion
     cocoapods
-    datagrip
     discord
     disk-inventory-x
     docker
@@ -202,7 +200,6 @@ modules="
     gpg-suite
     hipchat
     hyper
-    intellij-idea
     iterm2
     java
     java8
@@ -211,7 +208,6 @@ modules="
     min
     moom
     powershell
-    rider
     robo-3t
     setapp
     shuttle
