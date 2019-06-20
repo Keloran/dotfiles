@@ -21,6 +21,7 @@ brew upgrade
 modules="
     adns
     afflib
+    antibody
     asciidoc
     asio
     augeas
@@ -32,6 +33,8 @@ modules="
     boost
     c-ares
     carthage
+    cask
+    certbot
     cmake
     colordiff
     conan
@@ -39,16 +42,22 @@ modules="
     crystal
     crystal-lang
     ctags
+    curl
     dep
+    dialog
+    diff-so-fancy
     dnsmasq
     docbook
     docker-clean
     dockutil
+    dungeon
     editorconfig
+    elinks
     emacs
     engine_pkcs11
     fac
     freetype
+    gcc
     gdbm
     gettext
     gflags
@@ -67,15 +76,21 @@ modules="
     gradle
     htop
     icu4c
+    isl
+    jansoon
     jemalloc
+    jfrog-cli-go
     jpeg
     jq
     jsoncpp
+    kops
     kr
     kubernetes-cli
+    kubespy
     lastpass-cli
     libarchive
     libassuan
+    libev
     libevent
     libewf
     libffi
@@ -85,11 +100,14 @@ modules="
     libksba
     libmagic
     libmaxminddb
+    libmpc
     libp11
     libpng
     libpq
     librdkafka
     libsass
+    libsmi
+    libssh
     libssh2
     libtasn1
     libtiff
@@ -97,20 +115,27 @@ modules="
     libunistring
     libusb
     libxml2
-    libpd
+    libyaml
+    libzip
+    lldpd
     llvm
     llvm@5
+    llvm@6
     logstalgia
     lua
     lua@5.1
     luajit
     luarocks
+    lynx
     lz4
     lzlib
     mas
+    mpfr
     multitail
+    ncurses
     nethacked
     nettle
+    nghttp2
     nmap
     node
     npth
@@ -122,9 +147,11 @@ modules="
     osquery
     p11-kut
     pcre
+    pcre2
     perl
     pinentry
     pkgconfig
+    prettyping
     pth
     python
     python3
@@ -137,23 +164,30 @@ modules="
     ruby
     ruby@2.0
     rust
+    rustup-init
     s3cmd
+    saml2aws
     sassc
     sdl2
     sdl2_image
     siege
     sleuthkit
     snappy
+    source-highlight
     sqlite
     ssdeep
     ssh-copy-id
+    swig
     telnet
     the_silver_searcher
     thrift
     tig
+    tldr
     tmux
+    trash
     tree
     typescript
+    unbound
     vegeta
     vim
     watch
@@ -165,7 +199,9 @@ modules="
     yara
     yarn
     z
+    zork
     zplug
+    zsh
     zstd
 "
 for module in $modules; do
@@ -186,18 +222,19 @@ modules="
     alfred
     astro
     atom
+    azure-data-studio
     bartender
-    bettertouchtool
     cocoapods
     discord
     disk-inventory-x
     docker
     dotnet-sdk
     dropbox
+    firefox
     gas-mask
-    goland
     google-chrome
     gpg-suite
+    hammerspoon
     hipchat
     hyper
     iterm2
@@ -205,17 +242,27 @@ modules="
     java8
     jetbrains-toolbox
     kaliedoscope
+    kitty
+    microsoft-azure-storage-explorer
     min
+    minikube
     moom
-    powershell
+    omnifocus
+    pock
+    powershel
+    processingl
     robo-3t
     setapp
     shuttle
     skype
+    skype-for-business
     slack
+    spectrum
+    sql-operations-studio
     station
     virtualbox
     visual-studio-code
+    wireshark
 "
 for module in $modules; do
     brew cask install "$module"
@@ -223,21 +270,23 @@ done
 
 # Fonts
 modules="
-    font-consolas-for-powerline
-    font-hack-nerd-font
     font-anonymouspro-nerd-font
+    font-consolas-for-powerline
+    font-dejavusanmono-nerd-font
     font-firacode-nerd-font
+    font-hack-nerd-font
+    font-menlo-for-powerline
     font-meslo-nerd-font
-    font-mononoki-nerd-font
-    font-roboto-nerd-font
-    font-sourcecodepro-nerd-font
-    font-terminus-nerd-font
-    font-ubuntu-nerd-font
     font-monofur-nerd-font
     font-monoid-nerd-font
+    font-mononoki-nerd-font
     font-profont-nerd-font
+    font-robotomono-nerd-font
+    font-source-code-pro-for-powerline
+    font-sourcecodepro-nerd-font
     font-spacemono-nerd-font
-    font-dejavusansmono-nerd-font
+    font-terminus-nerd-font
+    font-ubuntu-nerd-font
 "
 for module in $modules; do
     brew cask install "$module"
