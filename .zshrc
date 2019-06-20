@@ -13,52 +13,14 @@ ZSH_THEME="keloran"
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-#ZSH_CUSTOM=/Users/Keloran/.zsh_custom
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx sudo common-aliases)
+plugins=(gitfast osx sudo common-aliases z brew docker aws zsh_reload)
 
-# User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/opt/go/libexec/bin:/usr/local/opt/python/libexec/bin:$PATH"
-export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-# export MANPATH="/usr/local/man:$MANPATH"
+# Java
+export JAVA_HOME=$(/usr/libexec/java_home -v 12)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -69,26 +31,6 @@ fi
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# GPG
-#if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
-#    source ~/.gnupg/.gpg-agent-info
-#    export GPG_AGENT_INFO
-#else
-#    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
-#fi
 # GPG
 if [[ -e ~/.gnupg/S.gpg-agent ]]; then
     export GPG_AGENT_INFO
@@ -97,7 +39,6 @@ else
 fi
 
 # Aliases
-#
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
@@ -107,49 +48,40 @@ if [ -f ~/.functions ]; then
     source ~/.functions
 fi
 
-# ZPlug
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
-zplug "desyncr/auto-ls"
-zplug "kingsj/atom_plugin.zsh"
-zplug "djui/alias-tips"
-zplug "bric3/nice-exit-code"
-zplug "webyneter/docker-aliases"
-zplug "bbenne10/goenv"
-zplug "chrissicool/zsh-256color"
-
-zplug "plugins/z", from:oh-my-zsh
-zplug "plugins/branch-manager", from:oh-my-zsh
-zplug "plugins/brew-cask", from:oh-my-zsh
-zplug "plugins/pod", from:oh-my-zsh
-zplug "plugins/brew", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
-zplug "plugins/aws", from:oh-my-zsh
-zplug "plugins/go", from:oh-my-zsh
-zplug "plugins/golang", from:oh-my-zsh
-
-zplug load
-
 # GO
-export GOROOT="/usr/local/Cellar/go/1.8/libexec/"
 export GO_ENV=~/.goenvs
+export GOPATH=$(go env GOPATH)
+GOBINS=$GOPATH/bin
+
+# Node
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 export GPG_TTY=$(tty)
 
-# PowerLine
-# function powerline_precmd() {
-    # PS1="$(powerline-shell --shell zsh $?)"
-# }
-# function install_powerline_precmd() {
-    # for s in "${precmd_functions[@]}"; do
-        # if [ "$s" = "powerline_precmd" ]; then
-            # return
-        # fi
-    # done
-    # precmd_functions+=(powerline_precmd)
-# }
-# if [ "$TERM" != "linux" ]; then
-    # install_powerline_precmd
-# fi
+# Jira
+export JIRA_NAME=max.hooton
+export JIRA_URL=https://auden-group.atlassian.net
+
+# WTF
+export WTF_JIRA_API_KEY=ZgIVYB0yUlNWlqphlGMsF77A
+export WTF_GITHUB_TOKEN=149eb7cc51b4586299a037d1115980dff1ce875c
+
+# PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/opt/go/libexec/bin:/usr/local/opt/python/libexec/bin:$GOBINS:$PATH"
+
+# ZPlug
+source /usr/local/opt/zplug/init.zsh
+
+zplug "kingsj/atom_plugin.zsh"
+zplug "bric3/nice-exit-code"
+zplug "bbenne10/goenv"
+zplug "chrissicool/zsh-256color"
+zplug "desyncr/auto-ls"
+zplug "mafredri/zsh-async"
+zplug "supercrabtree/k"
+zplug "eendroroy/zed-zsh"
+zplug "zsh-users/zsh-apple-touchbar"
+
+zplug load
+
