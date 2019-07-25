@@ -74,6 +74,9 @@ sub_apps () {
     sh -c $DOTFILES_DIR/installs/apps/brew.sh
     echo "Brew Installed"
 
+    sh -c $DOTFILES_DIR/installs/apps/npm.sh
+    echo "NPMs Installed"
+
     sh -c $DOTFILES_DIR/installs/apps/python.sh
     echo "Python Installed"
 
