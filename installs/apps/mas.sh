@@ -23,3 +23,6 @@ mas install 429449079
 
 # Unarchiver
 mas install 425424353
+
+# Bear
+mas install 1091189122
