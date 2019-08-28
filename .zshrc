@@ -52,11 +52,6 @@ fi
 export GO_ENV=~/.goenvs
 export GOPATH=$(go env GOPATH)
 GOBINS=$GOPATH/bin
-
-# Node
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
 export GPG_TTY=$(tty)
 
 # Jira
@@ -85,3 +80,6 @@ zplug "zsh-users/zsh-apple-touchbar"
 
 zplug load
 
+
+# added by travis gem
+[ -f /Users/keloran/.travis/travis.sh ] && source /Users/keloran/.travis/travis.sh

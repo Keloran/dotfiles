@@ -72,6 +72,7 @@ sub_apps () {
     echo "XCode Intalled"
 
     sh -c $DOTFILES_DIR/installs/apps/brew.sh
+    sh -c $DOTFILES_DIR/installs/apps/brew_fonts.sh
     echo "Brew Installed"
 
     sh -c $DOTFILES_DIR/installs/apps/npm.sh

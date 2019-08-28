@@ -5,14 +5,6 @@ if [ ! -f /usr/local/bin/brew ]; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Taps
-modules="
-    caskroom/fonts
-"
-for module in $modules; do
-    brew tap "$module"
-done
-
 # Update brew
 brew update
 brew upgrade

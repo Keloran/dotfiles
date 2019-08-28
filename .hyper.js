@@ -6,13 +6,10 @@ module.exports = {
   config: {
     hyperline: {
       plugins: [
-        'ip',
-        'hostname',
-        'Docker',
+        'battery',
         'network',
         'memory',
-        'cpu',
-        'Time'
+        'cpu'
       ]
     },
     hyperTabs: {
@@ -22,6 +19,100 @@ module.exports = {
     hyperlinks: {
       defaultBrowser: true
     },
+	hyperCustomTouchbar: [
+        // if you just need a single button then don't add options array
+        {
+            label: 'general',
+            backgroundColor: '#000000',
+            options: [
+                {
+                    label: 'clear',
+                    command: 'clear'
+                },
+                {
+                    label: 'update',
+                    command: 'updateSys'
+                }
+            ]
+        },
+        {
+            icon: '/Users/keloran/.hyper_plugins/icons/localstack.png',
+            backgroundColor: '#000000',
+            options: [
+                {
+                    label: 'dynamodb',
+                    command: 'SERVICES=dynamodb TMPDIR=private$TMPDIR localstack start --docker'
+                }
+            ]
+        },
+        {
+            icon: '/Users/keloran/.hyper_plugins/icons/docker.png',
+            options: [
+                {
+                    icon: '/Users/keloran/.hyper_plugins/icons/info.png',
+                    command: 'docker ps -a',
+                    backgroundColor: '#6767FF'
+                },
+                {
+                    icon: '/Users/keloran/.hyper_plugins/icons/start.png',
+                    command: 'dockerStart',
+                    backgroundColor: '#6767FF'
+                },
+                {
+                    icon: '/Users/keloran/.hyper_plugins/icons/stop.png',
+                    command: 'dockerStop',
+                    backgroundColor: '#6767FF'
+                }
+            ]
+        },
+        {
+            icon: '/Users/keloran/.hyper_plugins/icons/github.png',
+            options: [
+                {
+                    icon: '/Users/keloran/.hyper_plugins/icons/diff.png',
+                    command: 'git diff',
+                    backgroundColor: '#CFCFCF'
+                },
+                {
+                    icon: '/Users/keloran/.hyper_plugins/icons/info.png',
+                    command: 'git status',
+                    backgroundColor: '#CFCFCF'
+                },
+                {
+                    command: 'git log',
+                    icon: '/Users/keloran/.hyper_plugins/icons/log.png',
+                    backgroundColor: '#CFCFCF'
+                },
+                {
+                    command: 'git add .',
+                    icon: '/Users/keloran/.hyper_plugins/icons/add.png',
+                    backgroundColor: '#CFCFCF'
+                },
+                {
+                    icon: '/Users/keloran/.hyper_plugins/icons/download.png',
+                    backgroundColor: '#CFCFCF',
+                    command: 'git clone ',
+                    prompt: true
+                },
+            ]
+        },
+        {
+            icon: '/Users/keloran/.hyper_plugins/icons/vim.png',
+            backgroundColor: '#B2D8B2',
+            options: [
+                {
+                    icon: '/Users/keloran/.hyper_plugins/icons/quit.png',
+                    command: ':q!',
+                    esc: true
+                },
+		        {
+                    icon: '/Users/keloran/.hyper_plugins/icons/save.png',
+                    command: ':w',
+                    esc: true
+                },
+            ]
+        },
+    ],
 
     // default font size in pixels for all tabs
     fontSize: 11,
@@ -51,7 +142,7 @@ module.exports = {
     css: '',
 
     // custom css to embed in the terminal window
-    termCSS: 'x-row {line-height: initial} .unicode-node {position: relative}',
+    termCSS: '.unicode-node {position: relative}',
 
     // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
@@ -63,7 +154,8 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '3px 5px 4px 8px',
+    padding: '.5rem .5rem .8rem .5rem',
+    // padding: '3px 5px 8px 8px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -128,11 +220,14 @@ module.exports = {
     'hyperlinks',
     'hyper-tabs-enhanced',
     'hyper-history',
-    'hyper-seti-monokai',
+//    'hyper-seti-monokai',
+    'hyper-afterglow',
     'hyper-broadcast',
     'hyper-hide-title',
-    "hypercwd"
-  ],
+    "hypercwd",
+    "hyper-custom-touchbar",
+    "hyper-quit"
+],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# Taps
+modules="
+    caskroom/fonts
+"
+for module in $modules; do
+    brew tap "$module"
+done
+
 # Fonts
 modules="
     font-anonymouspro-nerd-font
