@@ -99,7 +99,12 @@ nmap <F4> <Plug>CommentaryLine
 nmap md :InstantMarkdownPreview<CR>
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <S-n> :NERDTreeFocus<CR>
+nnoremap <C-space> i
+imap <C-space> <Esc>
 
 " Markdown
 let g:instant_markdown_autostart = 0
 
+" Terminal
+set termwinsize=10x0
+set splitbelow
