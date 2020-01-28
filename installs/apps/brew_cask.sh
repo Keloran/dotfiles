@@ -12,7 +12,6 @@ modules="
     atom
     azure-data-studio
     bartender
-    cocoapods
     discord
     disk-inventory-x
     docker
@@ -37,7 +36,7 @@ modules="
     moom
     omnifocus
     pock
-    powershel
+    powershell
     processingl
     robo-3t
     setapp
@@ -52,7 +51,7 @@ modules="
     visual-studio-code
     wireshark
 "
-for module in $modules; do
-    brew cask install "$module"
+for module in ${modules}; do
+    brew cask install ${module}
 done
 

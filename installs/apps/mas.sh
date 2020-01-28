@@ -1,28 +1,17 @@
 #!/usr/bin/env bash
 
-# XCode
-mas install 497799835
+apps="
+    1091189122
+    425424353
+    587769990
+    1472777122
+    1121192229
+    497799835
+"
 
-# AirMail
-mas install 918858936
+if test $(which mas); then
+    for app in ${apps}; do
+        mas install ${app}
+    done
+fi
 
-# Boom
-mas install 948176063
-
-# EyeFriendly
-mas install 587769990
-
-# Pixelmator
-mas install 407963104
-
-# Deliveries
-mas install 924726344
-
-# Patterns
-mas install 429449079
-
-# Unarchiver
-mas install 425424353
-
-# Bear
-mas install 1091189122

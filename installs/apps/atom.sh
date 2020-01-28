@@ -20,9 +20,9 @@ if test "$(which apm)"; then
         ssh-config
     "
 
-    for module in $modules; do
-        if test ! -d "$HOME/.atom/packages/$module"; then
-            apm install "$module"
+    for module in ${modules}; do
+        if test ! -d "$HOME/.atom/packages/${module}"; then
+            apm install ${module}
         fi
     done
 
@@ -31,9 +31,9 @@ if test "$(which apm)"; then
         seti-ui
     "
 
-    for theme in $themes; do
-        if test ! -d "$HOME/.atom/packages/$theme"; then
-            apm install "$theme"
+    for theme in ${themes}; do
+        if test ! -d "$HOME/.atom/packages/${theme}"; then
+            apm install ${theme}
         fi
     done
 fi

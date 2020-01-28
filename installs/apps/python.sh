@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-pip2 install --upgrade pip
+if test "$(which pip2)"; then
+    pip2 install --upgrade pip
+fi
 
 modules="
     setuptools
     powerline-shell
     localstack
 "
-for module in $modules; do
-    pip install --upgrade "$module"
-done
+
+if test "$(which pip)"; then
+    for module in ${modules}; do
+        pip install --upgrade ${module}
+    done
+fi

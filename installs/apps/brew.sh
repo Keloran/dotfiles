@@ -196,8 +196,8 @@ modules="
     zsh
     zstd
 "
-for module in $modules; do
-    brew install "$module"
+for module in ${modules}; do
+    brew install ${module}
 done
 
 # Cleanup

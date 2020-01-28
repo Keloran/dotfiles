@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-sudo cp com.docker_alias.plist /Library/LaunchDaemons/com.docker_alias.plist
+CDIR=$(pwd)
+
+sudo cp ${CDIR}/com.docker_alias.plist /Library/LaunchDaemons/com.docker_alias.plist
 sudo launchctl load /Library/LaunchDaemons/com.docker_alias.plist
 
 echo "alias=10.254.254.254,127.0.0.1" >> $(brew --prefix)/etc/dnsmasq.conf

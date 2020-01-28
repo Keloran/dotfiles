@@ -2,10 +2,10 @@
 
 # Taps
 modules="
-    caskroom/fonts
+    homebrew/cask-fonts
 "
-for module in $modules; do
-    brew tap "$module"
+for module in ${modules}; do
+    brew tap ${module}
 done
 
 # Fonts
@@ -28,8 +28,8 @@ modules="
     font-terminus-nerd-font
     font-ubuntu-nerd-font
 "
-for module in $modules; do
-    brew cask install "$module"
+for module in ${modules}; do
+    brew cask install ${module}
 done
 
 
