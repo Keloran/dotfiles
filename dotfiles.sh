@@ -21,6 +21,7 @@ cat << EOF
         cli            Install CLI
         apps           Install Apps
         full           Install All of it
+        language       Install language stuff
 EOF
 }
 
@@ -76,17 +77,22 @@ sub_apps () {
     sh -c ${DOTFILES_DIR}/installs/apps/brew_fonts.sh
     echo "Brew Installed"
 
-    sh -c ${DOTFILES_DIR}/installs/apps/npm.sh
-    echo "NPMs Installed"
-
-    sh -c ${DOTFILES_DIR}/installs/apps/python.sh
-    echo "Python Installed"
-
-    sh -c ${DOTFILES_DIR}/installs/apps/gems.sh
-    echo "Gems Installed"
-
     sh -c ${DOTFILES_DIR}/installs/apps/mas.sh
     echo "MAS Installed"
+}
+
+sub_language() {
+    sh -c ${DOTFILES_DIR}/installs/language/gem.sh
+    echo "Installed Gems"
+
+    sh -c ${DOTFILES_DIR}/installs/language/python.sh
+    echo "Installed Python Apps / Eggs"
+
+    sh -c ${DOTFILES_DIR}/installs/language/npm.sh
+    echo "Installed NPMs"
+
+    sh -c ${DOTFILES_DIR}/installs/language/go.sh
+    echo "Installed Go Apps / Modules"
 }
 
 sub_dots() {
@@ -100,7 +106,6 @@ sub_dots() {
     cp ${DOTFILES_DIR}/.shuttle.json ${HOME}/.shuttle.json
     cp ${DOTFILES_DIR}/.tmux.conf ${HOME}/.tmux.conf
     cp ${DOTFILES_DIR}/.colordiffrc ${HOME}/.colordiffrc
-
     echo "Dots Installed"
 }
 
@@ -116,6 +121,7 @@ sub_full() {
     sub_editor
     sub_osx
     sub_zsh_dot
+    sub_language
     sub_reload
 }
 
