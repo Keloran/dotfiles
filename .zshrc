@@ -74,5 +74,8 @@ zplug "zsh-users/zsh-apple-touchbar"
 
 zplug load
 
+# QMK
+QMK_HOME=~/Documents/Projects/GitHub/qmk_firmware
+
 # added by travis gem
 [ -f /Users/keloran/.travis/travis.sh ] && source /Users/keloran/.travis/travis.sh
